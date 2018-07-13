@@ -27,18 +27,18 @@
 
 #ifdef __clang__
 #   ifdef __ICC // icpc defines the __clang__ macro
-#       pragma warning(push)
+#       pragma warning(add)
 #       pragma warning(disable: 161 1682)
 #   else // __ICC
 #       pragma clang diagnostic ignored "-Wunused-variable"
-#       pragma clang diagnostic push
+#       pragma clang diagnostic add
 #       pragma clang diagnostic ignored "-Wpadded"
 #       pragma clang diagnostic ignored "-Wswitch-enum"
 #       pragma clang diagnostic ignored "-Wcovered-switch-default"
 #    endif
 #elif defined __GNUC__
 #    pragma GCC diagnostic ignored "-Wparentheses"
-#    pragma GCC diagnostic push
+#    pragma GCC diagnostic add
 #    pragma GCC diagnostic ignored "-Wunused-variable"
 #    pragma GCC diagnostic ignored "-Wpadded"
 #endif
@@ -133,14 +133,14 @@ namespace Catch {
 #ifdef __clang__
 
 #       define CATCH_INTERNAL_SUPPRESS_GLOBALS_WARNINGS \
-            _Pragma( "clang diagnostic push" ) \
+            _Pragma( "clang diagnostic add" ) \
             _Pragma( "clang diagnostic ignored \"-Wexit-time-destructors\"" ) \
             _Pragma( "clang diagnostic ignored \"-Wglobal-constructors\"")
 #       define CATCH_INTERNAL_UNSUPPRESS_GLOBALS_WARNINGS \
             _Pragma( "clang diagnostic pop" )
 
 #       define CATCH_INTERNAL_SUPPRESS_PARENTHESES_WARNINGS \
-            _Pragma( "clang diagnostic push" ) \
+            _Pragma( "clang diagnostic add" ) \
             _Pragma( "clang diagnostic ignored \"-Wparentheses\"" )
 #       define CATCH_INTERNAL_UNSUPPRESS_PARENTHESES_WARNINGS \
             _Pragma( "clang diagnostic pop" )
@@ -739,7 +739,7 @@ inline id performOptionalSelector(id obj, SEL sel) {
 inline void arcSafeRelease(NSObject*) {}
 inline id performOptionalSelector(id obj, SEL sel) {
 #ifdef __clang__
-#pragma clang diagnostic push
+#pragma clang diagnostic add
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
 #endif
 	if ([obj respondsToSelector : sel])
@@ -2804,7 +2804,7 @@ namespace Catch {
 #include <memory>
 
 #ifdef __clang__
-#pragma clang diagnostic push
+#pragma clang diagnostic add
 #pragma clang diagnostic ignored "-Wpadded"
 #endif
 
@@ -3104,14 +3104,14 @@ return @ desc; \
   // start catch_test_spec_parser.h
 
 #ifdef __clang__
-#pragma clang diagnostic push
+#pragma clang diagnostic add
 #pragma clang diagnostic ignored "-Wpadded"
 #endif
 
   // start catch_test_spec.h
 
 #ifdef __clang__
-#pragma clang diagnostic push
+#pragma clang diagnostic add
 #pragma clang diagnostic ignored "-Wpadded"
 #endif
 
@@ -4477,7 +4477,7 @@ namespace Catch {
   // start catch_impl.hpp
 
 #ifdef __clang__
-#pragma clang diagnostic push
+#pragma clang diagnostic add
 #pragma clang diagnostic ignored "-Wweak-vtables"
 #endif
 
@@ -5259,7 +5259,7 @@ namespace Catch {
 #define CATCH_CLARA_TEXTFLOW_CONFIG_CONSOLE_WIDTH CATCH_CONFIG_CONSOLE_WIDTH-1
 
 #ifdef __clang__
-#pragma clang diagnostic push
+#pragma clang diagnostic add
 #pragma clang diagnostic ignored "-Wweak-vtables"
 #pragma clang diagnostic ignored "-Wexit-time-destructors"
 #pragma clang diagnostic ignored "-Wshadow"
@@ -6835,7 +6835,7 @@ namespace Catch {
   // start catch_console_colour.cpp
 
 #if defined(__clang__)
-#    pragma clang diagnostic push
+#    pragma clang diagnostic add
 #    pragma clang diagnostic ignored "-Wexit-time-destructors"
 #endif
 
@@ -7366,7 +7366,7 @@ namespace Catch {
 // start catch_fatal_condition.cpp
 
 #if defined(__GNUC__)
-#    pragma GCC diagnostic push
+#    pragma GCC diagnostic add
 #    pragma GCC diagnostic ignored "-Wmissing-field-initializers"
 #endif
 
@@ -9613,7 +9613,7 @@ namespace Catch {
 #include <memory>
 
 #if defined(__clang__)
-#    pragma clang diagnostic push
+#    pragma clang diagnostic add
 #    pragma clang diagnostic ignored "-Wexit-time-destructors"
 #endif
 
@@ -9877,7 +9877,7 @@ namespace Catch {
 // start catch_stringref.cpp
 
 #if defined(__clang__)
-#    pragma clang diagnostic push
+#    pragma clang diagnostic add
 #    pragma clang diagnostic ignored "-Wexit-time-destructors"
 #endif
 
@@ -10334,7 +10334,7 @@ namespace Catch {
 #include <sstream>
 
 #if defined(__clang__)
-#    pragma clang diagnostic push
+#    pragma clang diagnostic add
 #    pragma clang diagnostic ignored "-Wexit-time-destructors"
 #endif
 
@@ -10828,7 +10828,7 @@ namespace Catch {
   // start catch_tostring.cpp
 
 #if defined(__clang__)
-#    pragma clang diagnostic push
+#    pragma clang diagnostic add
 #    pragma clang diagnostic ignored "-Wexit-time-destructors"
 #    pragma clang diagnostic ignored "-Wglobal-constructors"
 #endif

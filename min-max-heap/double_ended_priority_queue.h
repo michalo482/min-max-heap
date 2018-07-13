@@ -13,35 +13,35 @@ public:
 
 	/**
 	 * \brief Pushes an element onto the double-ended priority queue.
-	 * \param element The element to push onto the double-ended priority queue.
+	 * \param element The element to add onto the double-ended priority queue.
 	 */
-	virtual void push(const T& element) = 0;
+	virtual void add(const T& element) = 0;
 
 	/**
 	 * \brief Removes the minimum element from the double-ended priority queue.
 	 * \return The minimum element in the priority queue.
 	 */
-	virtual T pop_min() = 0;
+	virtual T remove_min() = 0;
 
 
 	/**
 	 * \brief Removes the maximum element from the double-ended priority queue.
 	 * \return The maximum element in the double-ended priority queue.
 	 */
-	virtual T pop_max() = 0;
+	virtual T remove_max() = 0;
 
 
 	/**
 	 * \brief Gets the minimum element in the double-ended priority queue.
 	 * \return A constant reference to the minimum element in the double-ended priority queue.
 	 */
-	virtual const T& peek_min() const = 0;
+	virtual const T& min() const = 0;
 
 	/**
 	 * \brief Gets the maximum element in the double-ended priority queue.
 	 * \return A constant reference to the maximum element in the double-ended priority queue.
 	 */
-	virtual const T& peek_max() const = 0;
+	virtual const T& max() const = 0;
 
 	/**
 	 * \brief Gets the number of elements in the double-ended priority queue.
