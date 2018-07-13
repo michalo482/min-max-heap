@@ -43,21 +43,24 @@ public:
 	/** \brief Destroys the double-ended priority queue. */
 	virtual ~double_ended_priority_queue() = default;
 
-	/** \brief Pushes an element onto the double-ended priority queue. */
-	virtual void push() const = 0;
+	/**
+	 * \brief Pushes an element onto the double-ended priority queue.
+	 * \param element The element to push onto the double-ended priority queue.
+	 */
+	virtual void push(const T& element) = 0;
 
 	/**
 	 * \brief Removes the minimum element from the double-ended priority queue.
 	 * \return The minimum element in the priority queue.
 	 */
-	virtual T pop_min() const = 0;
+	virtual T pop_min() = 0;
 
 
 	/**
 	 * \brief Removes the maximum element from the double-ended priority queue.
 	 * \return The maximum element in the double-ended priority queue.
 	 */
-	virtual T pop_max() const = 0;
+	virtual T pop_max() = 0;
 
 
 	/**
