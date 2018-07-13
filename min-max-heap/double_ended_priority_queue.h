@@ -11,38 +11,6 @@ class double_ended_priority_queue {
 
 public:
 
-	/** \brief Initializes a double-ended priority queue. */
-	double_ended_priority_queue() = default;
-
-	/**
-	 * \brief Initializes a double-ended priority queue using copy construction.
-	 * \param q The double-ended priority queue to copy.
-	 */
-	double_ended_priority_queue(const double_ended_priority_queue& q) = default;
-
-	/**
-	 * \brief Initializes a double-ended priority queue using move construction.
-	 * \param q The double-ended priority queue to move.
-	 */
-	double_ended_priority_queue(double_ended_priority_queue&& q) noexcept = default;
-
-	/**
-	 * \brief Initializes a double-ended priority queue using copy assignment.
-	 * \param q The double-ended priority queue to copy.
-	 * \return A reference to the initialized double-ended priority queue.
-	 */
-	double_ended_priority_queue& operator=(const double_ended_priority_queue& q) = default;
-
-	/**
-	 * \brief Initializes a double-ended priority queue using move assignment.
-	 * \param q The double-ended priority queue to move.
-	 * \return A reference to the initialized double-ended priority queue.
-	 */
-	double_ended_priority_queue& operator=(double_ended_priority_queue&& q) noexcept = default;
-
-	/** \brief Destroys the double-ended priority queue. */
-	virtual ~double_ended_priority_queue() = default;
-
 	/**
 	 * \brief Pushes an element onto the double-ended priority queue.
 	 * \param element The element to push onto the double-ended priority queue.
@@ -80,4 +48,38 @@ public:
 	 * \return The number of elements in the double-ended priority queue.
 	 */
 	virtual size_t size() const = 0;
+
+protected:
+
+	/** \brief Initializes a double-ended priority queue. */
+	double_ended_priority_queue() = default;
+
+	/**
+	 * \brief Initializes a double-ended priority queue using copy construction.
+	 * \param q The double-ended priority queue to copy.
+	 */
+	double_ended_priority_queue(const double_ended_priority_queue& q) = default;
+
+	/**
+	 * \brief Initializes a double-ended priority queue using move construction.
+	 * \param q The double-ended priority queue to move.
+	 */
+	double_ended_priority_queue(double_ended_priority_queue&& q) noexcept = default;
+
+	/**
+	 * \brief Initializes a double-ended priority queue using copy assignment.
+	 * \param q The double-ended priority queue to copy.
+	 * \return A reference to the initialized double-ended priority queue.
+	 */
+	double_ended_priority_queue& operator=(const double_ended_priority_queue& q) = default;
+
+	/**
+	 * \brief Initializes a double-ended priority queue using move assignment.
+	 * \param q The double-ended priority queue to move.
+	 * \return A reference to the initialized double-ended priority queue.
+	 */
+	double_ended_priority_queue& operator=(double_ended_priority_queue&& q) noexcept = default;
+
+	/** \brief Destroys the double-ended priority queue. */
+	virtual ~double_ended_priority_queue() = default;
 };

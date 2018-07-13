@@ -9,13 +9,15 @@
 template <typename T>
 class min_max_heap : double_ended_priority_queue<T> {
 
-	static std::function<bool(T, T)> min_comparator_ = [](const auto& a, const auto& b) { return a < b; };
-	static std::function<bool(T, T)> max_comparator_ = [](const auto& a, const auto& b) { return a > b; };
+	std::function<bool(T, T)> min_comparator_ = [](const auto& a, const auto& b) { return a < b; };
+	std::function<bool(T, T)> max_comparator_ = [](const auto& a, const auto& b) { return a > b; };
 	std::vector<T> elements_;
 
 public:
 
-	min_max_heap(const std::initializer_list<T>& elements = {}) : elements_{elements} {
+	min_max_heap() = default;
+
+	min_max_heap(const std::initializer_list<T>& elements) : elements_{elements} {
 		for (auto i = parent(static_cast<int>(elements.size()) - 1); i >= 0; --i) {
 			heapify_down(i);
 		}
@@ -80,9 +82,7 @@ public:
 		}
 
 		if (elements_.size() == 1) {
-			const auto max_element = elements_[0];
-			elements_.pop_back();
-			return max_element;
+			return elements_[0];
 		}
 
 		const auto max_index = elements_[left_child(0)] > elements_[right_child(0)]
@@ -119,11 +119,11 @@ private:
 	}
 
 	bool has_left_child(const int index) const {
-		return left_child(index) < elements_.size();
+		return left_child(index) < static_cast<int>(elements_.size());
 	}
 
 	bool has_right_child(const int index) const {
-		return right_child(index) < elements_.size();
+		return right_child(index) < static_cast<int>(elements_.size());
 	}
 
 	std::vector<int> get_children(const int i) const {
@@ -172,7 +172,7 @@ private:
 		if (decendants.empty()) return;
 
 		const auto target_index = *std::min_element(
-			decendants.begin(), decendants.end(), [](const auto j, const auto k) {
+			decendants.begin(), decendants.end(), [&](const auto j, const auto k) {
 				return comparator(elements_[j], elements_[k]);
 			});
 
@@ -199,9 +199,9 @@ private:
 		if (is_min_level(i)) {
 			if (elements_[i] > elements_[parent(i)]) {
 				std::swap(elements_[i], elements_[parent(i)]);
-				heapify_up(elements_[parent(i)], std::max<T>);
+				heapify_up(elements_[parent(i)], max_comparator_);
 			} else {
-				heapify_up(i, std::min<T>);
+				heapify_up(i, min_comparator_);
 			}
 		} else {
 			if (elements_[i] < elements_[parent(i)]) {

@@ -2,9 +2,18 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="min_max_heap_test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="double_ended_priority_queue.h" />
     <ClInclude Include="min_max_heap.h" />
+    <ClInclude Include="extern\catch.h">
+      <Filter>lib</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="lib">
+      <UniqueIdentifier>{da1a7601-51ef-4561-86ff-aab5bb014c24}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
