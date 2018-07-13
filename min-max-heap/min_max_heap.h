@@ -6,12 +6,21 @@
 
 #include "double_ended_priority_queue.h"
 
+/**
+ * \brief An heap data structure used to efficiently process the minimum and maximum elements in a collection.
+ * \tparam T The type of the elements in the collection.
+ */
 template <typename T>
 class min_max_heap : double_ended_priority_queue<T> {
 
-	std::function<bool(T, T)> min_comparison_t_ = [](const auto& a, const auto& b) { return a < b; };
-	std::function<bool(T, T)> max_comparison_t_ = [](const auto& a, const auto& b) { return a > b; };
+	/** \brief The internal collection used to represent elements in the heap. */
 	std::vector<T> elements_;
+
+	/** \brief The comparison function used to ensure heap ordering at minimum levels in the heap. */
+	std::function<bool(T, T)> min_comparison_t_ = [](const auto& a, const auto& b) { return a < b; };
+
+	/** \brief The comparison function used to ensure heap ordering at the maximum levels in the heap. */
+	std::function<bool(T, T)> max_comparison_t_ = [](const auto& a, const auto& b) { return a > b; };
 
 public:
 
