@@ -75,10 +75,10 @@ TEST_CASE("Initialization", "[min_max_priority_queue]") {
 
 	SECTION("Initializing a min-max heap with a random collection of elements") {
 
-		const min_max_heap<int> h{6, 8, 4, 5, 1, 9, 2, 3, 0, 7};
+		const min_max_heap<int> h{6, 8, 4, 10, 12, 5, 1, 14, 9, 2, 13, 3, 0, 7, 11};
 
 		SECTION("The size of the heap equals to the number of elements in the collection the heap was constructed with") {
-			REQUIRE(h.size() == 10);
+			REQUIRE(h.size() == 15);
 		}
 
 		SECTION("The minimum element in the heap equals to the smallest element in the collection the heap was constructed with") {
@@ -86,7 +86,7 @@ TEST_CASE("Initialization", "[min_max_priority_queue]") {
 		}
 
 		SECTION("The maximum element in the heap equals to the largest element in the collection the heap was constructed with") {
-			REQUIRE(h.max() == 9);
+			REQUIRE(h.max() == 14);
 		}
 	}
 

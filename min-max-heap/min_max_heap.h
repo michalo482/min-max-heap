@@ -44,7 +44,7 @@ public:
 	 */
 	void add(const T& element) override {
 		elements_.push_back(element);
-		heapify_up(elements_.size() - 1);
+		heapify_up(static_cast<int>(elements_.size()) - 1);
 	}
 
 	/**
@@ -268,7 +268,7 @@ private:
 
 				heapify_down(extremum_element, comparator);
 			}
-		} else if (elements_[extremum_element] < elements_[index]) {
+		} else if (comparator(elements_[extremum_element], elements_[index])) {
 			std::swap(elements_[extremum_element], elements_[index]);
 		}
 	}
