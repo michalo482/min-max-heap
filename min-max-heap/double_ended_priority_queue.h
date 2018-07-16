@@ -12,7 +12,7 @@ class double_ended_priority_queue {
 public:
 
 	/**
-	 * \brief Pushes an element onto the double-ended priority queue.
+	 * \brief Adds an element onto the double-ended priority queue.
 	 * \param element The element to add onto the double-ended priority queue.
 	 */
 	virtual void add(const T& element) = 0;

@@ -4,6 +4,7 @@
 #include <functional>
 #include <vector>
 
+#include "empty_heap_exception.h"
 #include "double_ended_priority_queue.h"
 
 /**
@@ -53,7 +54,7 @@ public:
 	T remove_min() override {
 
 		if (elements_.empty()) {
-			throw std::runtime_error{"Cannot pop from an empty heap"};
+			throw empty_heap_exception{};
 		}
 
 		const auto min_element = elements_[0];
@@ -71,7 +72,7 @@ public:
 	T remove_max() override {
 
 		if (elements_.empty()) {
-			throw std::runtime_error{"Cannot pop from an empty heap"};
+			throw empty_heap_exception{};
 		}
 
 		if (elements_.size() == 1) {
@@ -98,11 +99,9 @@ public:
 	 */
 	const T& min() const override {
 
-		if (elements_.empty()) {
-			throw std::exception{"Cannot peek from an empty heap"};
-		}
-
-		return elements_[0];
+		return elements_.empty()
+			? throw empty_heap_exception{}
+			: elements_[0];
 	}
 
 	/**
@@ -112,7 +111,7 @@ public:
 	const T& max() const override {
 
 		if (elements_.empty()) {
-			throw std::exception{"Cannot peek from an empty heap"};
+			throw empty_heap_exception{};
 		}
 
 		if (elements_.size() == 1) {

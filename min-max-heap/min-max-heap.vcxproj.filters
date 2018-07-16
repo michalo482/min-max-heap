@@ -10,6 +10,7 @@
     <ClInclude Include="extern\catch.h">
       <Filter>lib</Filter>
     </ClInclude>
+    <ClInclude Include="empty_heap_exception.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="lib">
