@@ -146,3 +146,67 @@ TEST_CASE("Add", "[min_max_heap]") {
 		}
 	}
 }
+
+TEST_CASE("Remove", "[min_max_heap]") {
+
+	SECTION("Removing the minimum element") {
+
+		min_max_heap<int> h{9, 6, 1, 4, 8, 3, 2, 7, 5, 0};
+		const auto min = h.remove_min();
+
+		SECTION("The heap size by one") {
+			REQUIRE(h.size() == 9);
+		}
+
+		SECTION("The element removed from the heap equals the smallest element in the initial collection") {
+			REQUIRE(min == 0);
+		}
+
+		SECTION("The heap minimum equals the next smallest element") {
+			REQUIRE(h.min() == 1);
+		}
+
+		SECTION("The maximum remains unchanged") {
+			REQUIRE(h.max() == 9);
+		}
+	}
+
+	SECTION("Removing the maximum element") {
+
+		min_max_heap<int> h{9, 6, 1, 4, 8, 3, 2, 7, 5, 0};
+		const auto max = h.remove_max();
+
+		SECTION("The heap size by one") {
+			REQUIRE(h.size() == 9);
+		}
+
+		SECTION("The element removed from the heap equals the largest element in the initial collection") {
+			REQUIRE(max == 9);
+		}
+
+		SECTION("The minimum remains unchanged") {
+			REQUIRE(h.min() == 0);
+		}
+
+		SECTION("The heap maximum equals the next largest element") {
+			REQUIRE(h.max() == 8);
+		}
+	}
+
+	SECTION("Removing all elements from the heap") {
+
+		min_max_heap<int> h{9, 6, 1, 4, 8, 3, 2, 7, 5, 0};
+
+		SECTION("Elements removed by continuously extracting the minimum are in the correct order") {
+			for (auto i = 0; i < 10; ++i) {
+				REQUIRE(h.remove_min() == i);
+			}
+		}
+
+		SECTION("Elements removed by continuously extracting the maximum are in the correct order") {
+			for (auto i = 9; i >= 0; --i) {
+				REQUIRE(h.remove_max() == i);
+			}
+		}
+	}
+}
