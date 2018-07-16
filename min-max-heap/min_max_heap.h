@@ -284,16 +284,16 @@ private:
 		if (min_level(index)) {
 			if (elements_[index] > elements_[parent(index)]) {
 				std::swap(elements_[index], elements_[parent(index)]);
-				heapify_up(elements_[parent(index)], max_comparison_t_);
+				heapify_up(parent(index), max_comparison_t_);
 			} else {
 				heapify_up(index, min_comparison_t_);
 			}
 		} else {
 			if (elements_[index] < elements_[parent(index)]) {
 				std::swap(elements_[index], elements_[parent(index)]);
-				heapify_up(elements_[parent(index)], min_comparison_t_);
+				heapify_up(parent(index), min_comparison_t_);
 			} else {
-				heapify_up(elements_[index], max_comparison_t_);
+				heapify_up(index, max_comparison_t_);
 			}
 		}
 	}

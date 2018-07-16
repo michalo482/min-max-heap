@@ -107,3 +107,42 @@ TEST_CASE("Initialization", "[min_max_priority_queue]") {
 		}
 	}
 }
+
+TEST_CASE("Add", "[min_max_heap]") {
+
+	min_max_heap<int> h{9, 6, 1, 4, 8, 3, 2, 7, 5};
+
+	SECTION("Adding a element to the heap which is smaller than its current minimum") {
+
+		h.add(0);
+
+		SECTION("The heap size is increased by one") {
+			REQUIRE(h.size() == 10);
+		}
+
+		SECTION("The minimum element in the heap equals the newly introduced element") {
+			REQUIRE(h.min() == 0);
+		}
+
+		SECTION("The maximum element remains unchanged") {
+			REQUIRE(h.max() == 9);
+		}
+	}
+
+	SECTION("Adding a element to the heap which is greater than its current maximum") {
+
+		h.add(10);
+
+		SECTION("The heap size is increased by one") {
+			REQUIRE(h.size() == 10);
+		}
+
+		SECTION("The minimum element remains unchanged") {
+			REQUIRE(h.min() == 1);
+		}
+
+		SECTION("The maximum element in the heap equals the newly introduced element") {
+			REQUIRE(h.max() == 10);
+		}
+	}
+}
