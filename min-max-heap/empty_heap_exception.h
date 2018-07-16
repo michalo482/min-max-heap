@@ -9,6 +9,6 @@ public:
 
 	/** \copydoc std::exception::what */
 	char const* what() const override {
-		return "An invalid operation was attempted on am empty heap";
+		return "An invalid operation was attempted on an empty heap";
 	}
 };

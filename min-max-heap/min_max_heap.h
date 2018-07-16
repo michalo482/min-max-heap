@@ -53,9 +53,7 @@ public:
 	 */
 	T remove_min() override {
 
-		if (elements_.empty()) {
-			throw empty_heap_exception{};
-		}
+		if (elements_.empty()) throw empty_heap_exception{};
 
 		const auto min_element = elements_[0];
 		std::swap(elements_[0], elements_[elements_.size() - 1]);
@@ -71,9 +69,7 @@ public:
 	 */
 	T remove_max() override {
 
-		if (elements_.empty()) {
-			throw empty_heap_exception{};
-		}
+		if (elements_.empty()) throw empty_heap_exception{};
 
 		if (elements_.size() == 1) {
 			const auto max_element = elements_[0];
@@ -110,13 +106,8 @@ public:
 	 */
 	const T& max() const override {
 
-		if (elements_.empty()) {
-			throw empty_heap_exception{};
-		}
-
-		if (elements_.size() == 1) {
-			return elements_[0];
-		}
+		if (elements_.empty()) throw empty_heap_exception{};
+		if (elements_.size() == 1) return elements_[0];
 
 		const auto max_index = elements_[left_child(0)] > elements_[right_child(0)]
 			? left_child(0)

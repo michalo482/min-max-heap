@@ -2,19 +2,33 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="min_max_heap_test.cpp" />
+    <ClCompile Include="min_max_heap_test.cpp">
+      <Filter>test</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="double_ended_priority_queue.h" />
-    <ClInclude Include="min_max_heap.h" />
     <ClInclude Include="extern\catch.h">
       <Filter>lib</Filter>
     </ClInclude>
-    <ClInclude Include="empty_heap_exception.h" />
+    <ClInclude Include="double_ended_priority_queue.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="empty_heap_exception.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="min_max_heap.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="lib">
       <UniqueIdentifier>{da1a7601-51ef-4561-86ff-aab5bb014c24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{5477d4de-2fa0-4267-a739-a620f99ccae9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="test">
+      <UniqueIdentifier>{628de861-34b0-4d02-9713-1c5f92cedce2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
