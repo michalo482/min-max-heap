@@ -8,7 +8,7 @@ Getting started with building the project is easy. Simply open the project in Vi
 
 This project was written in pure C++ with no additional runtime dependencies. The only dependency used by this project is the testing framework [Catch](https://github.com/catchorg/Catch2) which is included in this repository as a single header. 
 
-### Usage
+## Usage
 
 Once the project has been built as either a static or dynamic library, it can be used by simply including `min_max_priority_queue.h` which then conforms to the canonical double-ended priority queue interface including
 
