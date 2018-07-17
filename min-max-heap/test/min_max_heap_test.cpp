@@ -154,7 +154,7 @@ TEST_CASE("Remove", "[min_max_heap]") {
 		min_max_heap<int> h{9, 6, 1, 4, 8, 3, 2, 7, 5, 0};
 		const auto min = h.remove_min();
 
-		SECTION("The heap size by one") {
+		SECTION("The heap size is decreased by one") {
 			REQUIRE(h.size() == 9);
 		}
 
@@ -176,7 +176,7 @@ TEST_CASE("Remove", "[min_max_heap]") {
 		min_max_heap<int> h{9, 6, 1, 4, 8, 3, 2, 7, 5, 0};
 		const auto max = h.remove_max();
 
-		SECTION("The heap size by one") {
+		SECTION("The heap size is decreased by one") {
 			REQUIRE(h.size() == 9);
 		}
 
