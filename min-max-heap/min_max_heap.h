@@ -71,8 +71,8 @@ public:
 
 		if (elements_.empty()) throw empty_heap_exception{};
 
-		if (elements_.size() == 1) {
-			const auto max_element = elements_[0];
+		if (elements_.size() <= 2) {
+			const auto max_element = elements_[elements_.size() - 1];
 			elements_.pop_back();
 			return max_element;
 		}
@@ -107,7 +107,7 @@ public:
 	const T& max() const override {
 
 		if (elements_.empty()) throw empty_heap_exception{};
-		if (elements_.size() == 1) return elements_[0];
+		if (elements_.size() <= 2) return elements_[elements_.size() - 1];
 
 		const auto max_index = elements_[left_child(0)] > elements_[right_child(0)]
 			? left_child(0)
