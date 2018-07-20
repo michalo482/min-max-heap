@@ -10,8 +10,8 @@ Getting started with building the project is easy. Simply open the project in Vi
 
 Once the project has been built as either a static or dynamic library, it can be used by simply including [`min_max_priority_queue.h`](https://github.com/matthew-rister/min-max-heap/blob/master/min-max-heap/src/min_max_heap.h) which then conforms to the canonical double-ended priority queue interface including
 
-1. `T min()`
-2. `T max()`
+1. `const T& min()`
+2. `const T& max()`
 2. `void add(const T& value)`
 2. `T remove_min()`
 3. `T remove_max()`
