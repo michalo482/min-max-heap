@@ -17,12 +17,6 @@ class min_max_heap : double_ended_priority_queue<T> {
 	/** \brief The internal collection used to represent elements in the heap. */
 	std::vector<T> elements_;
 
-	/** \brief The comparison function used to ensure heap ordering at minimum levels in the heap. */
-	std::function<bool(T, T)> min_comparison_t_ = [](const auto& a, const auto& b) { return a < b; };
-
-	/** \brief The comparison function used to ensure heap ordering at the maximum levels in the heap. */
-	std::function<bool(T, T)> max_comparison_t_ = [](const auto& a, const auto& b) { return a > b; };
-
 public:
 
 	/** \brief Initializes an empty min-max heap using default construction. */
@@ -236,10 +230,10 @@ private:
 	void heapify_down(const int index) {
 
 		if (min_level(index)) {
-			return heapify_down(index, min_comparison_t_);
+			return heapify_down(index, std::less<T>());
 		}
 
-		return heapify_down(index, max_comparison_t_);
+		return heapify_down(index, std::greater<T>());
 	}
 
 	/**
@@ -284,16 +278,16 @@ private:
 		if (min_level(index)) {
 			if (elements_[index] > elements_[parent(index)]) {
 				std::swap(elements_[index], elements_[parent(index)]);
-				heapify_up(parent(index), max_comparison_t_);
+				heapify_up(parent(index), std::greater<T>());
 			} else {
-				heapify_up(index, min_comparison_t_);
+				heapify_up(index, std::less<T>());
 			}
 		} else {
 			if (elements_[index] < elements_[parent(index)]) {
 				std::swap(elements_[index], elements_[parent(index)]);
-				heapify_up(parent(index), min_comparison_t_);
+				heapify_up(parent(index), std::less<T>());
 			} else {
-				heapify_up(index, max_comparison_t_);
+				heapify_up(index, std::greater<T>());
 			}
 		}
 	}
