@@ -12,7 +12,7 @@
  * \tparam T The type of the elements in the collection.
  */
 template <typename T>
-class min_max_heap : double_ended_priority_queue<T> {
+class min_max_heap final : double_ended_priority_queue<T> {
 
 	/** \brief The internal collection used to represent elements in the heap. */
 	std::vector<T> elements_;
@@ -243,27 +243,27 @@ private:
 	 */
 	void heapify_down(const int index, const std::function<bool(T, T)>& comparator) {
 
-		const auto decendants = get_descendants(index);
+		const auto descendants = get_descendants(index);
 
-		if (decendants.empty()) return;
+		if (descendants.empty()) return;
 
-		const auto extremum_element = *std::min_element(
-			decendants.begin(), decendants.end(), [&](const auto j, const auto k) {
+		const auto extremum = *std::min_element(
+			descendants.begin(), descendants.end(), [&](const auto j, const auto k) {
 				return comparator(elements_[j], elements_[k]);
 			});
 
-		if (extremum_element > right_child(index)) {
-			if (comparator(elements_[extremum_element], elements_[index])) {
-				std::swap(elements_[extremum_element], elements_[index]);
+		if (extremum > right_child(index)) {
+			if (comparator(elements_[extremum], elements_[index])) {
+				std::swap(elements_[extremum], elements_[index]);
 
-				if (!comparator(elements_[extremum_element], elements_[parent(extremum_element)])) {
-					std::swap(elements_[extremum_element], elements_[parent(extremum_element)]);
+				if (!comparator(elements_[extremum], elements_[parent(extremum)])) {
+					std::swap(elements_[extremum], elements_[parent(extremum)]);
 				}
 
-				heapify_down(extremum_element, comparator);
+				heapify_down(extremum, comparator);
 			}
-		} else if (comparator(elements_[extremum_element], elements_[index])) {
-			std::swap(elements_[extremum_element], elements_[index]);
+		} else if (comparator(elements_[extremum], elements_[index])) {
+			std::swap(elements_[extremum], elements_[index]);
 		}
 	}
 
