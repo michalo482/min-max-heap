@@ -4,7 +4,7 @@ This repository aims to provide a fast implementation of the [double-ended prior
 
 ## Getting Started
 
-This project was created with Visual Studio 2017 and built using MSBuild. Although it was written in pure C++ using only the standard library and the testing framework testing framework Catch, it has still yet to be verified on plaforms other than Windows.
+This project was created with Visual Studio 2017 and built using MSBuild. Although it was written in pure C++ using only the standard library and the testing framework testing framework [Catch](https://github.com/catchorg/Catch2), it has still yet to be verified on plaforms other than Windows.
 
 ## Usage
 
