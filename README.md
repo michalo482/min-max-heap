@@ -4,7 +4,7 @@ This repository aims to provide a fast implementation of the [double-ended prior
 
 ## Usage
 
-To use, include [`min_max_priority_queue.h`](https://github.com/matthew-rister/min-max-heap/blob/master/min_max_heap/src/min_max_heap.h) which conforms to the canonical double-ended priority queue interface including
+To use, include [`min_max_priority_queue.h`](https://github.com/matthew-rister/min_max_heap/blob/master/min-max-heap/src/min_max_heap.h) which conforms to the canonical double-ended priority queue interface including
 
 1. `const T& min()`
 2. `const T& max()`
@@ -13,4 +13,4 @@ To use, include [`min_max_priority_queue.h`](https://github.com/matthew-rister/m
 3. `T remove_max()`
 4. `size()`
 
-For more details see [`double_ended_priority_queue.h`](https://github.com/matthew-rister/min-max-heap/blob/master/min-max-heap/src/double_ended_priority_queue.h)
+For more details see [`double_ended_priority_queue.h`](https://github.com/matthew-rister/min_max_heap/blob/master/min-max-heap/src/double_ended_priority_queue.h)
