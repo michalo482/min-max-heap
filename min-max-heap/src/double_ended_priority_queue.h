@@ -7,8 +7,8 @@
  * \tparam T The type of the elements in the collection.
  */
 template <typename T>
-class double_ended_priority_queue {
-
+class DoubleEndedPriorityQueue
+{
 public:
 
 	/**
@@ -52,34 +52,34 @@ public:
 protected:
 
 	/** \brief Initializes a double-ended priority queue. */
-	double_ended_priority_queue() = default;
+	DoubleEndedPriorityQueue() = default;
 
 	/**
 	 * \brief Initializes a double-ended priority queue using copy construction.
 	 * \param q The double-ended priority queue to copy.
 	 */
-	double_ended_priority_queue(const double_ended_priority_queue& q) = default;
+	DoubleEndedPriorityQueue(const DoubleEndedPriorityQueue& q) = default;
 
 	/**
 	 * \brief Initializes a double-ended priority queue using move construction.
 	 * \param q The double-ended priority queue to move.
 	 */
-	double_ended_priority_queue(double_ended_priority_queue&& q) noexcept = default;
+	DoubleEndedPriorityQueue(DoubleEndedPriorityQueue&& q) noexcept = default;
 
 	/**
 	 * \brief Initializes a double-ended priority queue using copy assignment.
 	 * \param q The double-ended priority queue to copy.
 	 * \return A reference to the initialized double-ended priority queue.
 	 */
-	double_ended_priority_queue& operator=(const double_ended_priority_queue& q) = default;
+	DoubleEndedPriorityQueue& operator=(const DoubleEndedPriorityQueue& q) = default;
 
 	/**
 	 * \brief Initializes a double-ended priority queue using move assignment.
 	 * \param q The double-ended priority queue to move.
 	 * \return A reference to the initialized double-ended priority queue.
 	 */
-	double_ended_priority_queue& operator=(double_ended_priority_queue&& q) noexcept = default;
+	DoubleEndedPriorityQueue& operator=(DoubleEndedPriorityQueue&& q) noexcept = default;
 
 	/** \brief Destroys the double-ended priority queue. */
-	virtual ~double_ended_priority_queue() = default;
+	virtual ~DoubleEndedPriorityQueue() = default;
 };

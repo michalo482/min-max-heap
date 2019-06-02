@@ -12,7 +12,7 @@
  * \tparam T The type of the elements in the collection.
  */
 template <typename T>
-class min_max_heap final : double_ended_priority_queue<T> {
+class MinMaxHeap final : DoubleEndedPriorityQueue<T> {
 
 	/** \brief The internal collection used to represent elements in the heap. */
 	std::vector<T> elements_;
@@ -20,13 +20,13 @@ class min_max_heap final : double_ended_priority_queue<T> {
 public:
 
 	/** \brief Initializes an empty min-max heap using default construction. */
-	min_max_heap() = default;
+	MinMaxHeap() = default;
 
 	/**
 	 * \brief Initializes a min-max heap with a collection of elements.
 	 * \param elements The collection of elements to initially build the min-max heap from.
 	 */
-	min_max_heap(const std::initializer_list<T>& elements) : elements_{elements} {
+	MinMaxHeap(const std::initializer_list<T>& elements) : elements_{elements} {
 		for (auto i = parent(static_cast<int>(elements.size()) - 1); i >= 0; --i) {
 			heapify_down(i);
 		}
@@ -47,7 +47,7 @@ public:
 	 */
 	T remove_min() override {
 
-		if (elements_.empty()) throw empty_heap_exception{};
+		if (elements_.empty()) throw EmptyHeapException{};
 
 		const auto min_element = elements_[0];
 		std::swap(elements_[0], elements_[elements_.size() - 1]);
@@ -63,7 +63,7 @@ public:
 	 */
 	T remove_max() override {
 
-		if (elements_.empty()) throw empty_heap_exception{};
+		if (elements_.empty()) throw EmptyHeapException{};
 
 		if (elements_.size() <= 2) {
 			const auto max_element = elements_[elements_.size() - 1];
@@ -90,7 +90,7 @@ public:
 	const T& min() const override {
 
 		return elements_.empty()
-			? throw empty_heap_exception{}
+			? throw EmptyHeapException{}
 			: elements_[0];
 	}
 
@@ -100,7 +100,7 @@ public:
 	 */
 	const T& max() const override {
 
-		if (elements_.empty()) throw empty_heap_exception{};
+		if (elements_.empty()) throw EmptyHeapException{};
 		if (elements_.size() <= 2) return elements_[elements_.size() - 1];
 
 		const auto max_index = elements_[left_child(0)] > elements_[right_child(0)]
