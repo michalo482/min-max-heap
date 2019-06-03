@@ -12,7 +12,7 @@
  * \tparam T The type of the elements in the collection.
  */
 template <typename T>
-class MinMaxHeap final : DoubleEndedPriorityQueue<T> {
+class MinMaxHeap final : public DoubleEndedPriorityQueue<T> {
 
 	/** \brief The internal collection used to represent elements in the heap. */
 	std::vector<T> elements_;
