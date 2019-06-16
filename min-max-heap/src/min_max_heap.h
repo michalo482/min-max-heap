@@ -264,7 +264,8 @@ private:
 
 				heapify_down(extremum, comparator);
 			}
-		} else if (comparator(elements_[extremum], elements_[index])) {
+		}
+		else if (comparator(elements_[extremum], elements_[index])) {
 			std::swap(elements_[extremum], elements_[index]);
 		}
 	}
