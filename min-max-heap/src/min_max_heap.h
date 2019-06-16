@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <algorithm>
 #include <functional>
@@ -26,7 +26,8 @@ public:
 	 * \brief Initializes a min-max heap with a collection of elements.
 	 * \param elements The collection of elements to initially build the min-max heap from.
 	 */
-	MinMaxHeap(const std::initializer_list<T>& elements) : elements_{elements} {
+	MinMaxHeap(const std::initializer_list<T>& elements) : elements_{ elements } {
+
 		for (auto i = parent(static_cast<int>(elements.size()) - 1); i >= 0; --i) {
 			heapify_down(i);
 		}
@@ -37,6 +38,7 @@ public:
 	 * \param element The element to add onto the heap.
 	 */
 	void add(const T& element) override {
+
 		elements_.push_back(element);
 		heapify_up(static_cast<int>(elements_.size()) - 1);
 	}
@@ -89,9 +91,9 @@ public:
 	 */
 	const T& min() const override {
 
-		return elements_.empty()
-			? throw EmptyHeapException{}
-			: elements_[0];
+		if (elements_.empty()) throw EmptyHeapException{};
+
+		return elements_[0];
 	}
 
 	/**
@@ -279,14 +281,17 @@ private:
 			if (elements_[index] > elements_[parent(index)]) {
 				std::swap(elements_[index], elements_[parent(index)]);
 				heapify_up(parent(index), std::greater<T>());
-			} else {
+			}
+			else {
 				heapify_up(index, std::less<T>());
 			}
-		} else {
+		}
+		else {
 			if (elements_[index] < elements_[parent(index)]) {
 				std::swap(elements_[index], elements_[parent(index)]);
 				heapify_up(parent(index), std::less<T>());
-			} else {
+			}
+			else {
 				heapify_up(index, std::greater<T>());
 			}
 		}

@@ -3,7 +3,7 @@
 #include <exception>
 
 /** \brief An exception thrown when attempting to perform an invalid operation an empty heap. */
-class EmptyHeapException final : std::exception {
+class EmptyHeapException final : public std::exception {
 
 public:
 

@@ -7,8 +7,8 @@
  * \tparam T The type of the elements in the collection.
  */
 template <typename T>
-class DoubleEndedPriorityQueue
-{
+class DoubleEndedPriorityQueue {
+
 public:
 
 	/**
@@ -23,13 +23,11 @@ public:
 	 */
 	virtual T remove_min() = 0;
 
-
 	/**
 	 * \brief Removes the maximum element from the double-ended priority queue.
 	 * \return The maximum element in the double-ended priority queue.
 	 */
 	virtual T remove_max() = 0;
-
 
 	/**
 	 * \brief Gets the minimum element in the double-ended priority queue.
