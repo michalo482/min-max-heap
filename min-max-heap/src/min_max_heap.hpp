@@ -13,6 +13,9 @@ public:
 
 	MinMaxHeap() = default;
 
+	MinMaxHeap(const std::initializer_list<T>& elements)
+		: MinMaxHeap{elements.begin(), elements.end()} {}
+
 	template <typename InputIterator>
 	MinMaxHeap(const InputIterator& begin, const InputIterator& end)
 		: elements_{begin, end} {
@@ -24,9 +27,6 @@ public:
 			heapify_down(i);
 		}
 	}
-
-	MinMaxHeap(const std::initializer_list<T>& elements)
-		: MinMaxHeap{elements.begin(), elements.end()} {}
 
 	void add(const T& element) override {
 
