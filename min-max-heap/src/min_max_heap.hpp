@@ -4,8 +4,8 @@
 #include <functional>
 #include <vector>
 
-#include "empty_heap_exception.h"
-#include "double_ended_priority_queue.h"
+#include "empty_heap_exception.hpp"
+#include "double_ended_priority_queue.hpp"
 
 /**
  * \brief An heap data structure used to efficiently process the minimum and maximum elements in a collection.

@@ -1,5 +1,5 @@
 #include "catch.h"
-#include "min_max_heap.h"
+#include "min_max_heap.hpp"
 
 TEST_CASE("Initialization", "[MinMaxHeap]") {
 
