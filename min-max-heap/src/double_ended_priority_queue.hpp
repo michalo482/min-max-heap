@@ -56,27 +56,27 @@ protected:
 	 * \brief Initializes a double-ended priority queue using copy construction.
 	 * \param q The double-ended priority queue to copy.
 	 */
-	DoubleEndedPriorityQueue(const DoubleEndedPriorityQueue& q) = default;
+	DoubleEndedPriorityQueue(const DoubleEndedPriorityQueue&) = default;
 
 	/**
 	 * \brief Initializes a double-ended priority queue using move construction.
 	 * \param q The double-ended priority queue to move.
 	 */
-	DoubleEndedPriorityQueue(DoubleEndedPriorityQueue&& q) noexcept = default;
+	DoubleEndedPriorityQueue(DoubleEndedPriorityQueue&&) noexcept = default;
 
 	/**
 	 * \brief Initializes a double-ended priority queue using copy assignment.
 	 * \param q The double-ended priority queue to copy.
 	 * \return A reference to the initialized double-ended priority queue.
 	 */
-	DoubleEndedPriorityQueue& operator=(const DoubleEndedPriorityQueue& q) = default;
+	DoubleEndedPriorityQueue& operator=(const DoubleEndedPriorityQueue&) = default;
 
 	/**
 	 * \brief Initializes a double-ended priority queue using move assignment.
 	 * \param q The double-ended priority queue to move.
 	 * \return A reference to the initialized double-ended priority queue.
 	 */
-	DoubleEndedPriorityQueue& operator=(DoubleEndedPriorityQueue&& q) noexcept = default;
+	DoubleEndedPriorityQueue& operator=(DoubleEndedPriorityQueue&&) noexcept = default;
 
 	/** \brief Destroys the double-ended priority queue. */
 	virtual ~DoubleEndedPriorityQueue() = default;

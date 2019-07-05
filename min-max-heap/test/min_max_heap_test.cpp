@@ -10,14 +10,6 @@ TEST_CASE("Initialization", "[MinMaxHeap]") {
 		SECTION("The heap has a size of zero") {
 			REQUIRE(heap.size() == 0);
 		}
-
-		SECTION("Attempting to access the minimum element in the heap throws an empty heap exception") {
-			REQUIRE_THROWS_AS(heap.min(), EmptyHeapException);
-		}
-
-		SECTION("Attempting to access the maximum element in the heap throws an empty heap exception") {
-			REQUIRE_THROWS_AS(heap.max(), EmptyHeapException);
-		}
 	}
 
 	SECTION("Initializing a min-max heap with one element") {
