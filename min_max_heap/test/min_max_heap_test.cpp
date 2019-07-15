@@ -1,10 +1,9 @@
-#include "catch.h"
+#include "catch.hpp"
 #include "min_max_heap.hpp"
 
 TEST_CASE("Initialization", "[MinMaxHeap]") {
 
 	SECTION("Initializing a min-max heap with no elements") {
-
 		const MinMaxHeap<int> heap;
 
 		SECTION("The heap has a size of zero") {
@@ -13,7 +12,6 @@ TEST_CASE("Initialization", "[MinMaxHeap]") {
 	}
 
 	SECTION("Initializing a min-max heap with one element") {
-
 		const auto element = 0;
 		const MinMaxHeap<int> heap{element};
 
@@ -31,7 +29,6 @@ TEST_CASE("Initialization", "[MinMaxHeap]") {
 	}
 
 	SECTION("Initializing a min-max heap with a monotonically increasing collection of elements") {
-
 		const MinMaxHeap<int> heap{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
 		SECTION("The size of the heap equals to the number of elements in the collection the heap was constructed with") {
@@ -48,7 +45,6 @@ TEST_CASE("Initialization", "[MinMaxHeap]") {
 	}
 
 	SECTION("Initializing a min-max heap with a monotonically decreasing collection of elements") {
-
 		const MinMaxHeap<int> heap{9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
 
 		SECTION("The size of the heap equals to the number of elements in the collection the heap was constructed with") {
@@ -65,7 +61,6 @@ TEST_CASE("Initialization", "[MinMaxHeap]") {
 	}
 
 	SECTION("Initializing a min-max heap with a random collection of elements") {
-
 		const MinMaxHeap<int> heap{6, 8, 4, 10, 12, 5, 1, 14, 9, 2, 13, 3, 0, 7, 11};
 
 		SECTION("The size of the heap equals to the number of elements in the collection the heap was constructed with") {
@@ -82,7 +77,6 @@ TEST_CASE("Initialization", "[MinMaxHeap]") {
 	}
 
 	SECTION("Initializing a min-max heap with a collection of duplicate elements") {
-
 		const MinMaxHeap<int> heap{7, 7, 7, 7, 7, 7, 7, 7, 7, 7};
 
 		SECTION("The size of the heap equals to the number of elements in the collection the heap was constructed with") {
@@ -100,7 +94,6 @@ TEST_CASE("Initialization", "[MinMaxHeap]") {
 }
 
 TEST_CASE("Add", "[MinMaxHeap]") {
-
 	MinMaxHeap<int> heap{9, 6, 1, 4, 8, 3, 2, 7, 5};
 
 	SECTION("Adding a element to the heap which is smaller than its current minimum") {
@@ -139,10 +132,9 @@ TEST_CASE("Add", "[MinMaxHeap]") {
 }
 
 TEST_CASE("Remove", "[MinMaxHeap]") {
+	MinMaxHeap<int> heap{9, 6, 1, 4, 8, 3, 2, 7, 5, 0};
 
 	SECTION("Removing the minimum element") {
-
-		MinMaxHeap<int> heap{9, 6, 1, 4, 8, 3, 2, 7, 5, 0};
 		const auto min = heap.remove_min();
 
 		SECTION("The heap size is decreased by one") {
@@ -163,8 +155,6 @@ TEST_CASE("Remove", "[MinMaxHeap]") {
 	}
 
 	SECTION("Removing the maximum element") {
-
-		MinMaxHeap<int> heap{9, 6, 1, 4, 8, 3, 2, 7, 5, 0};
 		const auto max = heap.remove_max();
 
 		SECTION("The heap size is decreased by one") {
@@ -185,8 +175,6 @@ TEST_CASE("Remove", "[MinMaxHeap]") {
 	}
 
 	SECTION("Removing all elements from the heap") {
-
-		MinMaxHeap<int> heap{9, 6, 1, 4, 8, 3, 2, 7, 5, 0};
 
 		SECTION("Elements removed by continuously extracting the minimum are in the correct order") {
 			for (auto i = 0; i < 10; ++i) {

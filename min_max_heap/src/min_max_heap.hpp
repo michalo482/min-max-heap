@@ -6,22 +6,16 @@
 
 #include "double_ended_priority_queue.hpp"
 
-template <typename T>
-class MinMaxHeap final : public DoubleEndedPriorityQueue<T> {
+template <typename T> class MinMaxHeap final : public DoubleEndedPriorityQueue<T> {
 
 public:
-
 	MinMaxHeap() = default;
 
 	MinMaxHeap(const std::initializer_list<T>& elements)
 		: MinMaxHeap{elements.begin(), elements.end()} {}
 
-	template <typename InputIterator>
-	MinMaxHeap(const InputIterator& begin, const InputIterator& end)
+	template <typename ElementIterator> MinMaxHeap(const ElementIterator& begin, const ElementIterator& end)
 		: elements_{begin, end} {
-
-		static_assert(std::is_convertible<typename std::iterator_traits<InputIterator>::iterator_category, std::input_iterator_tag>::value);
-		static_assert(std::is_same<typename std::iterator_traits<InputIterator>::value_type, T>::value);
 
 		for (auto i = parent(static_cast<int>(end - begin) - 1); i >= 0; --i) {
 			heapify_down(i);

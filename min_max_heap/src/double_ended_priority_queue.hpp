@@ -11,11 +11,8 @@ class DoubleEndedPriorityQueue {
 
 public:
 
-	/**
-	 * \brief Adds an element onto the double-ended priority queue.
-	 * \param element The element to add onto the double-ended priority queue.
-	 */
-	virtual void add(const T& element) = 0;
+	/** \brief Adds an element onto the double-ended priority queue. */
+	virtual void add(const T&) = 0;
 
 	/**
 	 * \brief Removes the minimum element from the double-ended priority queue.
@@ -52,28 +49,20 @@ protected:
 	/** \brief Initializes a double-ended priority queue. */
 	DoubleEndedPriorityQueue() = default;
 
-	/**
-	 * \brief Initializes a double-ended priority queue using copy construction.
-	 * \param q The double-ended priority queue to copy.
-	 */
+	/** \brief Initializes a double-ended priority queue using copy construction. */
 	DoubleEndedPriorityQueue(const DoubleEndedPriorityQueue&) = default;
 
-	/**
-	 * \brief Initializes a double-ended priority queue using move construction.
-	 * \param q The double-ended priority queue to move.
-	 */
+	/** \brief Initializes a double-ended priority queue using move construction. */
 	DoubleEndedPriorityQueue(DoubleEndedPriorityQueue&&) noexcept = default;
 
 	/**
 	 * \brief Initializes a double-ended priority queue using copy assignment.
-	 * \param q The double-ended priority queue to copy.
 	 * \return A reference to the initialized double-ended priority queue.
 	 */
 	DoubleEndedPriorityQueue& operator=(const DoubleEndedPriorityQueue&) = default;
 
 	/**
 	 * \brief Initializes a double-ended priority queue using move assignment.
-	 * \param q The double-ended priority queue to move.
 	 * \return A reference to the initialized double-ended priority queue.
 	 */
 	DoubleEndedPriorityQueue& operator=(DoubleEndedPriorityQueue&&) noexcept = default;
