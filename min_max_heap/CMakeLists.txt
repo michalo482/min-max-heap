@@ -6,7 +6,7 @@ else()
   add_compile_options(-Wall -Wextra -pedantic -Werror)
 endif()
 
-include_directories("${CMAKE_SOURCE_DIR}/extern")
+include_directories("${CMAKE_SOURCE_DIR}/extern", "${CMAKE_SOURCE_DIR}/src")
 
 add_executable(min_max_heap "main.cpp" "test/min_max_heap_test.cpp")
 
