@@ -12,5 +12,3 @@ To use, include [`min_max_priority_queue.h`](https://github.com/matthew-rister/m
 2. `T remove_min()`
 3. `T remove_max()`
 4. `size()`
-
-For more details see [`double_ended_priority_queue.h`](https://github.com/matthew-rister/min_max_heap/blob/master/min-max-heap/src/double_ended_priority_queue.h)
