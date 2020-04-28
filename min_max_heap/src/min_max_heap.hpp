@@ -4,15 +4,12 @@
 #include <functional>
 #include <vector>
 
-#include "double_ended_priority_queue.hpp"
-
-template <typename T> class MinMaxHeap final : public DoubleEndedPriorityQueue<T> {
+template <typename T> class MinMaxHeap final {
 
 public:
 	MinMaxHeap() = default;
 
-	MinMaxHeap(const std::initializer_list<T>& elements)
-		: MinMaxHeap{elements.begin(), elements.end()} {}
+	MinMaxHeap(const std::initializer_list<T>& elements) : MinMaxHeap{elements.begin(), elements.end()} {}
 
 	template <typename ElementIterator> MinMaxHeap(const ElementIterator& begin, const ElementIterator& end)
 		: elements_{begin, end} {
@@ -22,13 +19,12 @@ public:
 		}
 	}
 
-	void add(const T& element) override {
-
+	void add(const T& element) {
 		elements_.push_back(element);
 		heapify_up(static_cast<int>(elements_.size()) - 1);
 	}
 
-	T remove_min() override {
+	T remove_min() {
 
 		const auto min_element = elements_[0];
 		std::swap(elements_[0], elements_[elements_.size() - 1]);
@@ -38,7 +34,7 @@ public:
 		return min_element;
 	}
 
-	T remove_max() override {
+	T remove_max() {
 
 		if (elements_.size() <= 2) {
 			const auto max_element = elements_[elements_.size() - 1];
@@ -58,11 +54,9 @@ public:
 		return max_element;
 	}
 
-	const T& min() const override {
-		return elements_[0];
-	}
+	[[nodiscard]] const T& min() const { return elements_[0]; }
 
-	const T& max() const override {
+	[[nodiscard]] const T& max() const {
 
 		if (elements_.size() <= 2) return elements_[elements_.size() - 1];
 
@@ -73,7 +67,7 @@ public:
 		return elements_[max_index];
 	}
 
-	size_t size() const override { return elements_.size(); }
+	[[nodiscard]] size_t size() const { return elements_.size(); }
 
 private:
 
@@ -85,10 +79,10 @@ private:
 	constexpr static int parent(const int index) { return (index - 1) / 2; }
 
 	constexpr static bool has_parent(const int index) { return index > 0; }
-	bool has_left_child(const int index) const { return left_child(index) < static_cast<int>(elements_.size()); }
-	bool has_right_child(const int index) const { return right_child(index) < static_cast<int>(elements_.size()); }
+	[[nodiscard]] bool has_left_child(const int index) const { return left_child(index) < static_cast<int>(elements_.size()); }
+	[[nodiscard]] bool has_right_child(const int index) const { return right_child(index) < static_cast<int>(elements_.size()); }
 
-	std::vector<int> get_children(const int index) const {
+	[[nodiscard]] std::vector<int> get_children(const int index) const {
 
 		std::vector<int> children;
 
@@ -103,7 +97,7 @@ private:
 		return children;
 	}
 
-	std::vector<int> get_descendants(const int index) const {
+	[[nodiscard]] std::vector<int> get_descendants(const int index) const {
 
 		std::vector<int> descendants;
 
