@@ -9,7 +9,7 @@ template <typename T> class MinMaxHeap final {
 public:
 	MinMaxHeap() = default;
 
-	MinMaxHeap(const std::initializer_list<T>& elements) : MinMaxHeap{elements.begin(), elements.end()} {}
+	MinMaxHeap(const std::initializer_list<T>& elements) : MinMaxHeap{std::cbegin(elements), std::cend(elements)} {}
 
 	template <typename ElementIterator> MinMaxHeap(const ElementIterator& begin, const ElementIterator& end)
 		: elements_{begin, end} {
@@ -128,7 +128,7 @@ private:
 		if (descendants.empty()) return;
 
 		const auto extremum = *std::min_element(
-			descendants.begin(), descendants.end(), [&](const auto j, const auto k) {
+			std::cbegin(descendants), std::cend(descendants), [&](const auto j, const auto k) {
 				return comparator(elements_[j], elements_[k]);
 			});
 
