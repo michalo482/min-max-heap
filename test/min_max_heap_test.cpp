@@ -1,4 +1,7 @@
+#define CATCH_CONFIG_MAIN
+
 #include "catch.hpp"
+
 #include "min_max_heap.hpp"
 
 TEST_CASE("Initialization", "[MinMaxHeap]") {
