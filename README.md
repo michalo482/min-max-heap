@@ -15,7 +15,7 @@ To use, include [`min_max_priority_queue.hpp`](https://github.com/matthew-rister
 
 ## Build
 
-To build the project, you must have cmake version 3 installed and a compiler that supports the C++17 language standard. You can then build from your favorite IDE or by running `cmake . && make` from the command line.
+To build the project, you must have cmake version 3 installed and a compiler that supports the C++17 language standard. You can then build from your favorite IDE or by running `cmake -GNinja . && ninja` from the command line.
 
 ## Test
 
