@@ -70,9 +70,6 @@ public:
 	[[nodiscard]] size_t size() const { return elements_.size(); }
 
 private:
-
-	std::vector<T> elements_;
-
 	constexpr static bool min_level(const int index) { return static_cast<int>(log2(index + 1)) % 2 == 0; }
 	constexpr static int left_child(const int index) { return 2 * index + 1; }
 	constexpr static int right_child(const int index) { return 2 * index + 2; }
@@ -183,4 +180,6 @@ private:
 			}
 		}
 	}
+
+	std::vector<T> elements_;
 };
