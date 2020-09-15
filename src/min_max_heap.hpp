@@ -14,7 +14,7 @@ public:
 	template <typename ElementIterator> MinMaxHeap(const ElementIterator& begin, const ElementIterator& end)
 		: elements_{begin, end} {
 
-		for (auto i = parent(static_cast<int>(end - begin) - 1); i >= 0; --i) {
+		for (auto i = parent(static_cast<std::int32_t>(end - begin) - 1); i >= 0; --i) {
 			heapify_down(i);
 		}
 	}
