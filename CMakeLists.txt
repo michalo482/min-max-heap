@@ -8,5 +8,5 @@ else()
   add_compile_options(-Wall -Wextra -pedantic -Werror)
 endif()
 
-include_directories(src/ extern/)
+include_directories(src/ lib/)
 add_executable (min_max_heap_test test/min_max_heap_test.cpp)
