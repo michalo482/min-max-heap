@@ -4,14 +4,17 @@
 #include <functional>
 #include <vector>
 
-template <typename T> class MinMaxHeap final {
+template <typename T>
+class MinMaxHeap final {
 
 public:
 	MinMaxHeap() = default;
 
-	MinMaxHeap(const std::initializer_list<T>& elements) : MinMaxHeap{std::cbegin(elements), std::cend(elements)} {}
+	MinMaxHeap(const std::initializer_list<T>& elements)
+		: MinMaxHeap{std::cbegin(elements), std::cend(elements)} {}
 
-	template <typename ElementIterator> MinMaxHeap(const ElementIterator& begin, const ElementIterator& end)
+	template <typename ElementIterator>
+	MinMaxHeap(const ElementIterator& begin, const ElementIterator& end)
 		: elements_{begin, end} {
 
 		for (auto i = parent(static_cast<int32_t>(end - begin) - 1); i >= 0; --i) {
@@ -25,12 +28,10 @@ public:
 	}
 
 	T remove_min() {
-
 		const auto min_element = elements_[0];
 		std::swap(elements_[0], elements_[elements_.size() - 1]);
 		elements_.pop_back();
 		heapify_down(0);
-
 		return min_element;
 	}
 
