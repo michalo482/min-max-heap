@@ -8,15 +8,11 @@ template <typename T>
 class MinMaxHeap final {
 
 public:
-	MinMaxHeap() = default;
-
-	MinMaxHeap(const std::initializer_list<T>& elements)
+	MinMaxHeap(const std::initializer_list<T>& elements = {})
 		: MinMaxHeap{std::cbegin(elements), std::cend(elements)} {}
 
 	template <typename ElementIterator>
-	MinMaxHeap(const ElementIterator& begin, const ElementIterator& end)
-		: elements_{begin, end} {
-
+	MinMaxHeap(const ElementIterator& begin, const ElementIterator& end) : elements_{begin, end} {
 		for (auto i = parent(static_cast<int32_t>(end - begin) - 1); i >= 0; --i) {
 			heapify_down(i);
 		}
@@ -71,17 +67,16 @@ public:
 	[[nodiscard]] size_t size() const { return elements_.size(); }
 
 private:
-	constexpr static bool min_level(const int32_t index) { return static_cast<int32_t>(log2(index + 1)) % 2 == 0; }
-	constexpr static int32_t left_child(const int32_t index) { return 2 * index + 1; }
-	constexpr static int32_t right_child(const int32_t index) { return 2 * index + 2; }
-	constexpr static int32_t parent(const int32_t index) { return (index - 1) / 2; }
+	static constexpr bool min_level(const int32_t index) { return static_cast<int32_t>(log2(index + 1)) % 2 == 0; }
+	static constexpr std::int32_t left_child(const int32_t index) { return 2 * index + 1; }
+	static constexpr std::int32_t right_child(const int32_t index) { return 2 * index + 2; }
+	static constexpr std::int32_t parent(const int32_t index) { return (index - 1) / 2; }
 
-	constexpr static bool has_parent(const int32_t index) { return index > 0; }
+	static constexpr bool has_parent(const int32_t index) { return index > 0; }
 	[[nodiscard]] bool has_left_child(const int32_t index) const { return left_child(index) < static_cast<int32_t>(elements_.size()); }
 	[[nodiscard]] bool has_right_child(const int32_t index) const { return right_child(index) < static_cast<int32_t>(elements_.size()); }
 
 	[[nodiscard]] std::vector<int32_t> get_children(const int32_t index) const {
-
 		std::vector<int32_t> children;
 
 		if (has_left_child(index)) {
@@ -96,7 +91,6 @@ private:
 	}
 
 	[[nodiscard]] std::vector<int32_t> get_descendants(const int32_t index) const {
-
 		std::vector<int32_t> descendants;
 
 		for (const auto child : get_children(index)) {
@@ -146,7 +140,7 @@ private:
 		}
 	}
 
-	void heapify_up(const int32_t index) {
+	void heapify_up(const std::int32_t index) {
 
 		if (!has_parent(index)) return;
 
