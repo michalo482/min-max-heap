@@ -5,7 +5,7 @@
 #include <vector>
 
 template <typename T>
-class MinMaxHeap final {
+class MinMaxHeap {
 
 public:
 	MinMaxHeap(const std::initializer_list<T>& elements = {})
