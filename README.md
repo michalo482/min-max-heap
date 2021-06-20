@@ -1,6 +1,6 @@
 # Mix-Max Heap
 
-This library provides a fast, header-only implementation of a [double-ended priority queue](https://en.wikipedia.org/wiki/Double-ended_priority_queue) through the use of a data structure known as the [Min-Max Heap](https://en.wikipedia.org/wiki/Min-max_heap) which can be used to process the minimum and maximum elements of a collection in constant time. One of the principal use cases for this is in creating bounded priority queues of a fixed length where minimum or maximum elements can be easily purged once the heap has reached capacity.
+This library provides a fast, header-only implementation of a [double-ended priority queue](https://en.wikipedia.org/wiki/Double-ended_priority_queue) through the use of a data structure known as the [Min-Max Heap](https://github.com/matthew-rister/min_max_heap/blob/master/docs/Min-Max%20Heaps%20And%20Generalized%20Priority%20Queues.pdf) which can be used to process the minimum and maximum elements of a collection in constant time. One of the principal use cases for this is in creating bounded priority queues of a fixed length where minimum or maximum elements can be easily purged once the heap has reached capacity.
 
 ## Usage
 
