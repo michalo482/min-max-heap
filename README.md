@@ -4,7 +4,7 @@ This library provides a fast, header-only implementation of a [double-ended prio
 
 ## Usage
 
-To use, include [`min_max_priority_queue.hpp`](https://github.com/matthew-rister/min_max_heap/blob/master/min_max_heap/src/min_max_heap.hpp) which conforms to the canonical double-ended priority queue interface including
+To use, include [`min_max_heap.hpp`](https://github.com/matthew-rister/min_max_heap/blob/master/src/min_max_heap.hpp) which conforms to the canonical double-ended priority queue interface including
 
 1. `const T& min()`
 2. `const T& max()`
@@ -15,7 +15,7 @@ To use, include [`min_max_priority_queue.hpp`](https://github.com/matthew-rister
 
 ## Build
 
-To build the project, you must have cmake version 3 installed and a compiler that supports the C++17 language standard. You can then build from your favorite IDE or by running `cmake -G Ninja . && ninja` from the command line.
+To build the project, you must have cmake version 3 installed and a compiler that supports the C++17 language standard. You can then build from your favorite IDE or by running `cmake . && make` from the command line.
 
 ## Test
 
