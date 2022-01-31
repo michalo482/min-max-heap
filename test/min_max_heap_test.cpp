@@ -1,5 +1,7 @@
 #define CATCH_CONFIG_MAIN
 
+#include <vector>
+
 #include "catch.hpp"
 
 #include "min_max_heap.hpp"
@@ -10,7 +12,7 @@ TEST_CASE("Initialization", "[MinMaxHeap]") {
 		const MinMaxHeap<int> heap;
 
 		SECTION("The heap has a size of zero") {
-			REQUIRE(heap.size() == 0);
+			REQUIRE(heap.Size() == 0);
 		}
 	}
 
@@ -19,15 +21,15 @@ TEST_CASE("Initialization", "[MinMaxHeap]") {
 		const MinMaxHeap<int> heap{element};
 
 		SECTION("The size of the heap is one") {
-			REQUIRE(heap.size() == 1);
+			REQUIRE(heap.Size() == 1);
 		}
 
 		SECTION("The minimum element in the heap is the element initially added to the heap") {
-			REQUIRE(heap.min() == element);
+			REQUIRE(heap.Min() == element);
 		}
 
 		SECTION("The maximum element in the heap is the element initially added to the heap") {
-			REQUIRE(heap.max() == element);
+			REQUIRE(heap.Max() == element);
 		}
 	}
 
@@ -35,15 +37,15 @@ TEST_CASE("Initialization", "[MinMaxHeap]") {
 		const MinMaxHeap<int> heap{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
 		SECTION("The size of the heap equals to the number of elements in the collection the heap was constructed with") {
-			REQUIRE(heap.size() == 10);
+			REQUIRE(heap.Size() == 10);
 		}
 
 		SECTION("The minimum element in the heap equals the smallest element in the collection the heap was constructed with") {
-			REQUIRE(heap.min() == 0);
+			REQUIRE(heap.Min() == 0);
 		}
 
 		SECTION("The maximum element in the heap equals the largest element in the collection the heap was constructed with") {
-			REQUIRE(heap.max() == 9);
+			REQUIRE(heap.Max() == 9);
 		}
 	}
 
@@ -51,15 +53,15 @@ TEST_CASE("Initialization", "[MinMaxHeap]") {
 		const MinMaxHeap<int> heap{9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
 
 		SECTION("The size of the heap equals to the number of elements in the collection the heap was constructed with") {
-			REQUIRE(heap.size() == 10);
+			REQUIRE(heap.Size() == 10);
 		}
 
 		SECTION("The minimum element in the heap equals the smallest element in the collection the heap was constructed with") {
-			REQUIRE(heap.min() == 0);
+			REQUIRE(heap.Min() == 0);
 		}
 
 		SECTION("The maximum element in the heap equals the largest element in the collection the heap was constructed with") {
-			REQUIRE(heap.max() == 9);
+			REQUIRE(heap.Max() == 9);
 		}
 	}
 
@@ -67,15 +69,15 @@ TEST_CASE("Initialization", "[MinMaxHeap]") {
 		const MinMaxHeap<int> heap{6, 8, 4, 10, 12, 5, 1, 14, 9, 2, 13, 3, 0, 7, 11};
 
 		SECTION("The size of the heap equals to the number of elements in the collection the heap was constructed with") {
-			REQUIRE(heap.size() == 15);
+			REQUIRE(heap.Size() == 15);
 		}
 
 		SECTION("The minimum element in the heap equals to the smallest element in the collection the heap was constructed with") {
-			REQUIRE(heap.min() == 0);
+			REQUIRE(heap.Min() == 0);
 		}
 
 		SECTION("The maximum element in the heap equals to the largest element in the collection the heap was constructed with") {
-			REQUIRE(heap.max() == 14);
+			REQUIRE(heap.Max() == 14);
 		}
 	}
 
@@ -83,15 +85,15 @@ TEST_CASE("Initialization", "[MinMaxHeap]") {
 		const MinMaxHeap<int> heap{7, 7, 7, 7, 7, 7, 7, 7, 7, 7};
 
 		SECTION("The size of the heap equals to the number of elements in the collection the heap was constructed with") {
-			REQUIRE(heap.size() == 10);
+			REQUIRE(heap.Size() == 10);
 		}
 
 		SECTION("The minimum element in the heap equals to the smallest element in the collection the heap was constructed with") {
-			REQUIRE(heap.min() == 7);
+			REQUIRE(heap.Min() == 7);
 		}
 
 		SECTION("The maximum element in the heap equals to the largest element in the collection the heap was constructed with") {
-			REQUIRE(heap.max() == 7);
+			REQUIRE(heap.Max() == 7);
 		}
 	}
 }
@@ -101,35 +103,35 @@ TEST_CASE("Add", "[MinMaxHeap]") {
 
 	SECTION("Adding a element to the heap which is smaller than its current minimum") {
 
-		heap.add(0);
+		heap.Add(0);
 
 		SECTION("The heap size is increased by one") {
-			REQUIRE(heap.size() == 10);
+			REQUIRE(heap.Size() == 10);
 		}
 
 		SECTION("The minimum element in the heap equals the newly introduced element") {
-			REQUIRE(heap.min() == 0);
+			REQUIRE(heap.Min() == 0);
 		}
 
 		SECTION("The maximum element remains unchanged") {
-			REQUIRE(heap.max() == 9);
+			REQUIRE(heap.Max() == 9);
 		}
 	}
 
 	SECTION("Adding a element to the heap which is greater than its current maximum") {
 
-		heap.add(10);
+		heap.Add(10);
 
 		SECTION("The heap size is increased by one") {
-			REQUIRE(heap.size() == 10);
+			REQUIRE(heap.Size() == 10);
 		}
 
 		SECTION("The minimum element remains unchanged") {
-			REQUIRE(heap.min() == 1);
+			REQUIRE(heap.Min() == 1);
 		}
 
 		SECTION("The maximum element in the heap equals the newly introduced element") {
-			REQUIRE(heap.max() == 10);
+			REQUIRE(heap.Max() == 10);
 		}
 	}
 }
@@ -138,10 +140,10 @@ TEST_CASE("Remove", "[MinMaxHeap]") {
 	MinMaxHeap<int> heap{9, 6, 1, 4, 8, 3, 2, 7, 5, 0};
 
 	SECTION("Removing the minimum element") {
-		const auto min = heap.remove_min();
+		const auto min = heap.RemoveMin();
 
 		SECTION("The heap size is decreased by one") {
-			REQUIRE(heap.size() == 9);
+			REQUIRE(heap.Size() == 9);
 		}
 
 		SECTION("The element removed from the heap equals the smallest element in the initial collection") {
@@ -149,19 +151,19 @@ TEST_CASE("Remove", "[MinMaxHeap]") {
 		}
 
 		SECTION("The heap minimum equals the next smallest element") {
-			REQUIRE(heap.min() == 1);
+			REQUIRE(heap.Min() == 1);
 		}
 
 		SECTION("The maximum remains unchanged") {
-			REQUIRE(heap.max() == 9);
+			REQUIRE(heap.Max() == 9);
 		}
 	}
 
 	SECTION("Removing the maximum element") {
-		const auto max = heap.remove_max();
+		const auto max = heap.RemoveMax();
 
 		SECTION("The heap size is decreased by one") {
-			REQUIRE(heap.size() == 9);
+			REQUIRE(heap.Size() == 9);
 		}
 
 		SECTION("The element removed from the heap equals the largest element in the initial collection") {
@@ -169,11 +171,11 @@ TEST_CASE("Remove", "[MinMaxHeap]") {
 		}
 
 		SECTION("The minimum remains unchanged") {
-			REQUIRE(heap.min() == 0);
+			REQUIRE(heap.Min() == 0);
 		}
 
 		SECTION("The heap maximum equals the next largest element") {
-			REQUIRE(heap.max() == 8);
+			REQUIRE(heap.Max() == 8);
 		}
 	}
 
@@ -181,13 +183,13 @@ TEST_CASE("Remove", "[MinMaxHeap]") {
 
 		SECTION("Elements removed by continuously extracting the minimum are in the correct order") {
 			for (auto i = 0; i < 10; ++i) {
-				REQUIRE(heap.remove_min() == i);
+				REQUIRE(heap.RemoveMin() == i);
 			}
 		}
 
 		SECTION("Elements removed by continuously extracting the maximum are in the correct order") {
 			for (auto i = 9; i >= 0; --i) {
-				REQUIRE(heap.remove_max() == i);
+				REQUIRE(heap.RemoveMax() == i);
 			}
 		}
 	}

@@ -6,12 +6,12 @@ This library provides a fast, header-only implementation of a [double-ended prio
 
 To use, include [`min_max_heap.hpp`](https://github.com/matthew-rister/min_max_heap/blob/master/src/min_max_heap.hpp) which conforms to the canonical double-ended priority queue interface including
 
-1. `const T& min()`
-2. `const T& max()`
-3. `void add(const T& value)`
-4. `T remove_min()`
-5. `T remove_max()`
-6. `size()`
+1. `const T& Min()`
+2. `const T& Max()`
+3. `void Add(const T& value)`
+4. `T RemoveMin()`
+5. `T RemoveMax()`
+6. `int Size()`
 
 ## Build
 

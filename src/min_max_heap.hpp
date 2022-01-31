@@ -8,95 +8,90 @@ template <typename T>
 class MinMaxHeap {
 
 public:
-	MinMaxHeap(const std::initializer_list<T>& elements = {})
-		: MinMaxHeap{std::cbegin(elements), std::cend(elements)} {}
+	MinMaxHeap(const std::initializer_list<T>& elements = {}) : MinMaxHeap{std::begin(elements), std::end(elements)} {}
 
-	template <typename ElementIterator>
-	MinMaxHeap(const ElementIterator& begin, const ElementIterator& end) : elements_{begin, end} {
-		for (auto i = parent(static_cast<std::int32_t>(end - begin) - 1); i >= 0; --i) {
-			heapify_down(i);
+	template <typename TIterator>
+	MinMaxHeap(const TIterator& begin, const TIterator& end) : elements_{begin, end} {
+		for (auto i = ParentIndex(static_cast<int>(end - begin) - 1); i >= 0; --i) {
+			HeapifyDown(i);
 		}
 	}
 
-	void add(const T& element) {
+	void Add(const T& element) {
 		elements_.push_back(element);
-		heapify_up(static_cast<std::int32_t>(elements_.size()) - 1);
+		HeapifyUp(Size() - 1);
 	}
 
-	T remove_min() {
-		const auto min_element = elements_[0];
-		std::swap(elements_[0], elements_[elements_.size() - 1]);
+	T RemoveMin() {
+		const auto min_element = elements_.at(0);
+		std::swap(elements_.at(0), elements_.at(Size() - 1));
 		elements_.pop_back();
-		heapify_down(0);
+		HeapifyDown(0);
 		return min_element;
 	}
 
-	T remove_max() {
-
+	T RemoveMax() {
 		if (elements_.size() <= 2) {
-			const auto max_element = elements_[elements_.size() - 1];
+			const auto max_element = elements_.at(Size() - 1);
 			elements_.pop_back();
 			return max_element;
 		}
 
-		const auto max_index = elements_[left_child(0)] > elements_[right_child(0)]
-			? left_child(0)
-			: right_child(0);
+		const auto left_child = elements_.at(kRootLeftChildIndex), right_child = elements_.at(kRootRightChildIndex);
+		const auto max_index = left_child > right_child ? kRootLeftChildIndex : kRootRightChildIndex;
+		const auto max_element = elements_.at(max_index);
 
-		const auto max_element = elements_[max_index];
-		std::swap(elements_[max_index], elements_[elements_.size() - 1]);
+		std::swap(elements_.at(max_index), elements_.at(Size() - 1));
 		elements_.pop_back();
-		heapify_down(max_index);
+		HeapifyDown(max_index);
 
 		return max_element;
 	}
 
-	[[nodiscard]] const T& min() const { return elements_[0]; }
+	[[nodiscard]] const T& Min() const { return elements_.at(0); }
 
-	[[nodiscard]] const T& max() const {
+	[[nodiscard]] const T& Max() const {
 
-		if (elements_.size() <= 2) return elements_[elements_.size() - 1];
+		if (elements_.size() <= 2) return elements_.at(elements_.size() - 1);
 
-		const auto max_index = elements_[left_child(0)] > elements_[right_child(0)]
-			? left_child(0)
-			: right_child(0);
-
-		return elements_[max_index];
+		const auto left_child = elements_.at(kRootLeftChildIndex), right_child = elements_.at(kRootRightChildIndex);
+		const auto max_index = left_child > right_child ? kRootLeftChildIndex : kRootRightChildIndex;
+		return elements_.at(max_index);
 	}
 
-	[[nodiscard]] size_t size() const { return elements_.size(); }
+	[[nodiscard]] int Size() const noexcept { return static_cast<int>(elements_.size()); }
 
 private:
-	static constexpr bool min_level(const std::int32_t index) { return static_cast<std::int32_t>(log2(index + 1)) % 2 == 0; }
-	static constexpr std::int32_t left_child(const std::int32_t index) { return 2 * index + 1; }
-	static constexpr std::int32_t right_child(const std::int32_t index) { return 2 * index + 2; }
-	static constexpr std::int32_t parent(const std::int32_t index) { return (index - 1) / 2; }
+	static bool IsMinLevel(const int index) noexcept { return static_cast<int>(log2(index + 1)) % 2 == 0; }
+	static constexpr int LeftChildIndex(const int index) { return 2 * index + 1; }
+	static constexpr int RightChildIndex(const int index) { return 2 * index + 2; }
+	static constexpr int ParentIndex(const int index) { return (index - 1) / 2; }
 
-	static constexpr bool has_parent(const std::int32_t index) { return index > 0; }
-	[[nodiscard]] bool has_left_child(const std::int32_t index) const { return left_child(index) < static_cast<std::int32_t>(elements_.size()); }
-	[[nodiscard]] bool has_right_child(const std::int32_t index) const { return right_child(index) < static_cast<std::int32_t>(elements_.size()); }
+	static constexpr bool HasParent(const int index) { return index > 0; }
+	[[nodiscard]] bool HasLeftChild(const int index) const { return LeftChildIndex(index) < Size(); }
+	[[nodiscard]] bool HasRightChild(const int index) const { return RightChildIndex(index) < Size(); }
 
-	[[nodiscard]] std::vector<std::int32_t> get_children(const std::int32_t index) const {
-		std::vector<std::int32_t> children;
+	[[nodiscard]] std::vector<int> GetChildren(const int index) const {
+		std::vector<int> children;
 
-		if (has_left_child(index)) {
-			children.push_back(left_child(index));
+		if (HasLeftChild(index)) {
+			children.push_back(LeftChildIndex(index));
 
-			if (has_right_child(index)) {
-				children.push_back(right_child(index));
+			if (HasRightChild(index)) {
+				children.push_back(RightChildIndex(index));
 			}
 		}
 
 		return children;
 	}
 
-	[[nodiscard]] std::vector<std::int32_t> get_descendants(const std::int32_t index) const {
-		std::vector<std::int32_t> descendants;
+	[[nodiscard]] std::vector<int> GetDescendants(const int index) const {
+		std::vector<int> descendants;
 
-		for (const auto child : get_children(index)) {
+		for (const auto child : GetChildren(index)) {
 			descendants.push_back(child);
 
-			for (const auto grandchild : get_children(child)) {
+			for (const auto grandchild : GetChildren(child)) {
 				descendants.push_back(grandchild);
 			}
 		}
@@ -104,77 +99,69 @@ private:
 		return descendants;
 	}
 
-	void heapify_down(const std::int32_t index) {
-
-		if (min_level(index)) {
-			return heapify_down(index, std::less<T>());
-		}
-
-		return heapify_down(index, std::greater<T>());
+	void HeapifyDown(const int index) {
+		return IsMinLevel(index) ? HeapifyDown(index, std::less<T>()) : HeapifyDown(index, std::greater<T>());
 	}
 
-	void heapify_down(const std::int32_t index, const std::function<bool(T, T)>& comparator) {
+	void HeapifyDown(const int index, const std::function<bool(T, T)>& comparator) {
 
-		const auto descendants = get_descendants(index);
-
+		const auto descendants = GetDescendants(index);
 		if (descendants.empty()) return;
 
 		const auto extremum = *std::min_element(
 			std::cbegin(descendants), std::cend(descendants), [&](const auto j, const auto k) {
-				return comparator(elements_[j], elements_[k]);
+				return comparator(elements_.at(j), elements_.at(k));
 			});
 
-		if (extremum > right_child(index)) {
-			if (comparator(elements_[extremum], elements_[index])) {
-				std::swap(elements_[extremum], elements_[index]);
+		if (extremum > RightChildIndex(index)) {
+			if (comparator(elements_.at(extremum), elements_.at(index))) {
+				std::swap(elements_.at(extremum), elements_.at(index));
 
-				if (!comparator(elements_[extremum], elements_[parent(extremum)])) {
-					std::swap(elements_[extremum], elements_[parent(extremum)]);
+				if (!comparator(elements_.at(extremum), elements_.at(ParentIndex(extremum)))) {
+					std::swap(elements_.at(extremum), elements_.at(ParentIndex(extremum)));
 				}
 
-				heapify_down(extremum, comparator);
+				HeapifyDown(extremum, comparator);
 			}
-		}
-		else if (comparator(elements_[extremum], elements_[index])) {
-			std::swap(elements_[extremum], elements_[index]);
+		} else if (comparator(elements_.at(extremum), elements_.at(index))) {
+			std::swap(elements_.at(extremum), elements_.at(index));
 		}
 	}
 
-	void heapify_up(const std::int32_t index) {
+	void HeapifyUp(const int index) {
 
-		if (!has_parent(index)) return;
+		if (!HasParent(index)) return;
 
-		if (min_level(index)) {
-			if (elements_[index] > elements_[parent(index)]) {
-				std::swap(elements_[index], elements_[parent(index)]);
-				heapify_up(parent(index), std::greater<T>());
+		if (IsMinLevel(index)) {
+			if (elements_.at(index) > elements_[ParentIndex(index)]) {
+				std::swap(elements_.at(index), elements_[ParentIndex(index)]);
+				HeapifyUp(ParentIndex(index), std::greater<T>());
+			} else {
+				HeapifyUp(index, std::less<T>());
 			}
-			else {
-				heapify_up(index, std::less<T>());
-			}
-		}
-		else {
-			if (elements_[index] < elements_[parent(index)]) {
-				std::swap(elements_[index], elements_[parent(index)]);
-				heapify_up(parent(index), std::less<T>());
-			}
-			else {
-				heapify_up(index, std::greater<T>());
+		} else {
+			if (elements_.at(index) < elements_[ParentIndex(index)]) {
+				std::swap(elements_.at(index), elements_[ParentIndex(index)]);
+				HeapifyUp(ParentIndex(index), std::less<T>());
+			} else {
+				HeapifyUp(index, std::greater<T>());
 			}
 		}
 	}
 
-	void heapify_up(const std::int32_t index, const std::function<bool(T, T)>& comparator) {
+	void HeapifyUp(const int index, const std::function<bool(T, T)>& comparator) {
 
-		if (has_parent(index) && has_parent(parent(index))) {
-			const auto grandparent = parent(parent(index));
+		if (HasParent(index) && HasParent(ParentIndex(index))) {
+			const auto grandparent = ParentIndex(ParentIndex(index));
 
-			if (comparator(elements_[index], elements_[grandparent])) {
-				std::swap(elements_[index], elements_[grandparent]);
-				heapify_up(grandparent, comparator);
+			if (comparator(elements_.at(index), elements_[grandparent])) {
+				std::swap(elements_.at(index), elements_[grandparent]);
+				HeapifyUp(grandparent, comparator);
 			}
 		}
 	}
 
+	static constexpr int kRootLeftChildIndex = LeftChildIndex(0);
+	static constexpr int kRootRightChildIndex = RightChildIndex(0);
 	std::vector<T> elements_;
 };
