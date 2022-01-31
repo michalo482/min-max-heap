@@ -8,7 +8,8 @@ template <typename T>
 class MinMaxHeap {
 
 public:
-	MinMaxHeap(const std::initializer_list<T>& elements = {}) : MinMaxHeap{std::begin(elements), std::end(elements)} {}
+	MinMaxHeap() noexcept = default;
+	MinMaxHeap(const std::initializer_list<T>& elements) : MinMaxHeap{std::begin(elements), std::end(elements)} {}
 
 	template <typename TIterator>
 	MinMaxHeap(const TIterator& begin, const TIterator& end) : elements_{begin, end} {
@@ -51,7 +52,6 @@ public:
 	[[nodiscard]] const T& Min() const { return elements_.at(0); }
 
 	[[nodiscard]] const T& Max() const {
-
 		if (elements_.size() <= 2) return elements_.at(elements_.size() - 1);
 
 		const auto left_child = elements_.at(kRootLeftChildIndex), right_child = elements_.at(kRootRightChildIndex);
