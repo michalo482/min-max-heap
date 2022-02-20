@@ -10,8 +10,8 @@ class MinMaxHeap {
 public:
 	MinMaxHeap() noexcept = default;
 	MinMaxHeap(const std::initializer_list<T>& elements) : MinMaxHeap{std::begin(elements), std::end(elements)} {}
-
-	template <typename TIterator>
+	
+	template <typename TIterator> 
 	MinMaxHeap(const TIterator& begin, const TIterator& end) : elements_{begin, end} {
 		for (auto i = ParentIndex(static_cast<int>(end - begin) - 1); i >= 0; --i) {
 			HeapifyDown(i);
@@ -32,13 +32,15 @@ public:
 	}
 
 	T RemoveMax() {
+		
 		if (elements_.size() <= 2) {
 			const auto max_element = elements_.at(Size() - 1);
 			elements_.pop_back();
 			return max_element;
 		}
 
-		const auto left_child = elements_.at(kRootLeftChildIndex), right_child = elements_.at(kRootRightChildIndex);
+		const auto left_child = elements_.at(kRootLeftChildIndex);
+		const auto right_child = elements_.at(kRootRightChildIndex);
 		const auto max_index = left_child > right_child ? kRootLeftChildIndex : kRootRightChildIndex;
 		const auto max_element = elements_.at(max_index);
 
@@ -52,10 +54,13 @@ public:
 	[[nodiscard]] const T& Min() const { return elements_.at(0); }
 
 	[[nodiscard]] const T& Max() const {
+		
 		if (elements_.size() <= 2) return elements_.at(elements_.size() - 1);
-
-		const auto left_child = elements_.at(kRootLeftChildIndex), right_child = elements_.at(kRootRightChildIndex);
+		
+		const auto left_child = elements_.at(kRootLeftChildIndex);
+		const auto right_child = elements_.at(kRootRightChildIndex);
 		const auto max_index = left_child > right_child ? kRootLeftChildIndex : kRootRightChildIndex;
+		
 		return elements_.at(max_index);
 	}
 
