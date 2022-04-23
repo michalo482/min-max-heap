@@ -23,6 +23,11 @@ public:
 		HeapifyUp(Size() - 1);
 	}
 
+	void Add(T&& element) {
+		elements_.push_back(std::move(element));
+		HeapifyUp(Size() - 1);
+	}
+
 	T RemoveMin() {
 		const auto min_element = elements_.at(0);
 		std::swap(elements_.at(0), elements_.at(Size() - 1));

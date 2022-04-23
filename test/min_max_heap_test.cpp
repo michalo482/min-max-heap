@@ -103,7 +103,8 @@ TEST_CASE("Add", "[MinMaxHeap]") {
 
 	SECTION("Adding a element to the heap which is smaller than its current minimum") {
 
-		heap.Add(0);
+		auto value = 0;
+		heap.Add(value);
 
 		SECTION("The heap size is increased by one") {
 			REQUIRE(heap.Size() == 10);
