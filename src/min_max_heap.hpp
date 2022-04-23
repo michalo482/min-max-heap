@@ -50,12 +50,12 @@ public:
 		return max_value;
 	}
 
-	[[nodiscard]] const T& Min() const {
+	[[nodiscard]] const T& Min() const noexcept {
 		assert(!data_.empty());
 		return data_[0];
 	}
 
-	[[nodiscard]] const T& Max() const {
+	[[nodiscard]] const T& Max() const noexcept {
 		assert(!data_.empty());
 		if (data_.size() <= 2) {
 			return data_[Size() - 1];
@@ -69,14 +69,15 @@ public:
 	[[nodiscard]] int Size() const noexcept { return static_cast<int>(data_.size()); }
 
 private:
-	static bool IsMinLevel(const int index) noexcept { return static_cast<int>(std::log2(index + 1)) % 2 == 0; }
-	static constexpr int LeftChildIndex(const int index) { return 2 * index + 1; }
-	static constexpr int RightChildIndex(const int index) { return 2 * index + 2; }
-	static constexpr int ParentIndex(const int index) { return (index - 1) / 2; }
+	static bool IsMinLevel(const int index) { return static_cast<int>(std::log2(index + 1)) % 2 == 0; }
 
-	static constexpr bool HasParent(const int index) { return index > 0; }
-	[[nodiscard]] bool HasLeftChild(const int index) const { return LeftChildIndex(index) < Size(); }
-	[[nodiscard]] bool HasRightChild(const int index) const { return RightChildIndex(index) < Size(); }
+	static constexpr int LeftChildIndex(const int index) noexcept { return 2 * index + 1; }
+	static constexpr int RightChildIndex(const int index) noexcept { return 2 * index + 2; }
+	static constexpr int ParentIndex(const int index) noexcept { return (index - 1) / 2; }
+
+	static constexpr bool HasParent(const int index) noexcept { return index > 0; }
+	[[nodiscard]] bool HasLeftChild(const int index) const noexcept { return LeftChildIndex(index) < Size(); }
+	[[nodiscard]] bool HasRightChild(const int index) const noexcept { return RightChildIndex(index) < Size(); }
 
 	[[nodiscard]] std::vector<int> GetChildren(const int index) const {
 		std::vector<int> children;
