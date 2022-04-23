@@ -19,12 +19,7 @@ public:
 		}
 	}
 
-	void Add(const T& value) {
-		data_.push_back(value);
-		HeapifyUp(Size() - 1);
-	}
-
-	void Add(T&& value) {
+	void Add(T value) {
 		data_.push_back(std::move(value));
 		HeapifyUp(Size() - 1);
 	}
