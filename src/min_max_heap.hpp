@@ -14,7 +14,7 @@ public:
 		: MinMaxHeap{std::cbegin(data), std::cend(data)} {}
 
 	template <typename TIterator>
-	MinMaxHeap(const TIterator& begin, const TIterator& end) : data_{begin, end} {
+	MinMaxHeap(const TIterator& begin, const TIterator& end) : data_(begin, end) {
 		for (auto i = ParentIndex(static_cast<int>(end - begin) - 1); i >= 0; --i) {
 			HeapifyDown(i);
 		}
