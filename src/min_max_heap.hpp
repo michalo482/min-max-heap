@@ -30,7 +30,7 @@ public:
 
 	T RemoveMin() {
 		const auto min_element = data_.at(0);
-		std::swap(data_.at(0), data_.at(Size() - 1));
+		std::swap(data_.at(0), data_.at(data_.size() - 1));
 		data_.pop_back();
 		HeapifyDown(0);
 		return min_element;
@@ -39,7 +39,7 @@ public:
 	T RemoveMax() {
 
 		if (data_.size() <= 2) {
-			const auto max_element = data_.at(Size() - 1);
+			const auto max_element = data_.at(data_.size() - 1);
 			data_.pop_back();
 			return max_element;
 		}
@@ -49,7 +49,7 @@ public:
 		const auto max_index = left_child > right_child ? kRootLeftChildIndex : kRootRightChildIndex;
 		const auto max_element = data_.at(max_index);
 
-		std::swap(data_.at(max_index), data_.at(Size() - 1));
+		std::swap(data_.at(max_index), data_.at(data_.size() - 1));
 		data_.pop_back();
 		HeapifyDown(max_index);
 
