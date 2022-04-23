@@ -17,19 +17,19 @@ TEST_CASE("Initialization", "[MinMaxHeap]") {
 	}
 
 	SECTION("Initializing a min-max heap with one element") {
-		const auto element = 0;
-		const MinMaxHeap<int> heap{element};
+		const auto value = 0;
+		const MinMaxHeap<int> heap{value};
 
 		SECTION("The size of the heap is one") {
 			REQUIRE(heap.Size() == 1);
 		}
 
 		SECTION("The minimum element in the heap is the element initially added to the heap") {
-			REQUIRE(heap.Min() == element);
+			REQUIRE(heap.Min() == value);
 		}
 
 		SECTION("The maximum element in the heap is the element initially added to the heap") {
-			REQUIRE(heap.Max() == element);
+			REQUIRE(heap.Max() == value);
 		}
 	}
 
@@ -102,7 +102,6 @@ TEST_CASE("Add", "[MinMaxHeap]") {
 	MinMaxHeap<int> heap{9, 6, 1, 4, 8, 3, 2, 7, 5};
 
 	SECTION("Adding a element to the heap which is smaller than its current minimum") {
-
 		auto value = 0;
 		heap.Add(value);
 
@@ -120,7 +119,6 @@ TEST_CASE("Add", "[MinMaxHeap]") {
 	}
 
 	SECTION("Adding a element to the heap which is greater than its current maximum") {
-
 		heap.Add(10);
 
 		SECTION("The heap size is increased by one") {
@@ -141,14 +139,14 @@ TEST_CASE("Remove", "[MinMaxHeap]") {
 	MinMaxHeap<int> heap{9, 6, 1, 4, 8, 3, 2, 7, 5, 0};
 
 	SECTION("Removing the minimum element") {
-		const auto min = heap.RemoveMin();
+		const auto min_value = heap.RemoveMin();
 
 		SECTION("The heap size is decreased by one") {
 			REQUIRE(heap.Size() == 9);
 		}
 
 		SECTION("The element removed from the heap equals the smallest element in the initial collection") {
-			REQUIRE(min == 0);
+			REQUIRE(min_value == 0);
 		}
 
 		SECTION("The heap minimum equals the next smallest element") {
@@ -161,14 +159,14 @@ TEST_CASE("Remove", "[MinMaxHeap]") {
 	}
 
 	SECTION("Removing the maximum element") {
-		const auto max = heap.RemoveMax();
+		const auto max_value = heap.RemoveMax();
 
 		SECTION("The heap size is decreased by one") {
 			REQUIRE(heap.Size() == 9);
 		}
 
 		SECTION("The element removed from the heap equals the largest element in the initial collection") {
-			REQUIRE(max == 9);
+			REQUIRE(max_value == 9);
 		}
 
 		SECTION("The minimum remains unchanged") {
