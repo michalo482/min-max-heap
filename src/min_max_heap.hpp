@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include <algorithm>
+#include <cmath>
 #include <functional>
 #include <vector>
 
@@ -29,50 +30,51 @@ public:
 	}
 
 	T RemoveMin() {
-		const auto min_element = data_.at(0);
-		std::swap(data_.at(0), data_.at(data_.size() - 1));
+		assert(!data_.empty());
+		const auto min_value = data_[0];
+		std::swap(data_[0], data_[Size() - 1]);
 		data_.pop_back();
 		HeapifyDown(0);
-		return min_element;
+		return min_value;
 	}
 
 	T RemoveMax() {
-
+		assert(!data_.empty());
 		if (data_.size() <= 2) {
-			const auto max_element = data_.at(data_.size() - 1);
+			const auto max_value = data_[Size() - 1];
 			data_.pop_back();
-			return max_element;
+			return max_value;
 		}
-
-		const auto left_child = data_.at(kRootLeftChildIndex);
-		const auto right_child = data_.at(kRootRightChildIndex);
+		const auto left_child = data_[kRootLeftChildIndex];
+		const auto right_child = data_[kRootRightChildIndex];
 		const auto max_index = left_child > right_child ? kRootLeftChildIndex : kRootRightChildIndex;
-		const auto max_element = data_.at(max_index);
-
-		std::swap(data_.at(max_index), data_.at(data_.size() - 1));
+		const auto max_value = data_[max_index];
+		std::swap(data_[max_index], data_[Size() - 1]);
 		data_.pop_back();
 		HeapifyDown(max_index);
-
-		return max_element;
+		return max_value;
 	}
 
-	[[nodiscard]] const T& Min() const { return data_.at(0); }
+	[[nodiscard]] const T& Min() const {
+		assert(!data_.empty());
+		return data_[0];
+	}
 
 	[[nodiscard]] const T& Max() const {
-
-		if (data_.size() <= 2) return data_.at(data_.size() - 1);
-
-		const auto left_child = data_.at(kRootLeftChildIndex);
-		const auto right_child = data_.at(kRootRightChildIndex);
+		assert(!data_.empty());
+		if (data_.size() <= 2) {
+			return data_[Size() - 1];
+		}
+		const auto left_child = data_[kRootLeftChildIndex];
+		const auto right_child = data_[kRootRightChildIndex];
 		const auto max_index = left_child > right_child ? kRootLeftChildIndex : kRootRightChildIndex;
-
-		return data_.at(max_index);
+		return data_[max_index];
 	}
 
 	[[nodiscard]] int Size() const noexcept { return static_cast<int>(data_.size()); }
 
 private:
-	static bool IsMinLevel(const int index) noexcept { return static_cast<int>(log2(index + 1)) % 2 == 0; }
+	static bool IsMinLevel(const int index) noexcept { return static_cast<int>(std::log2(index + 1)) % 2 == 0; }
 	static constexpr int LeftChildIndex(const int index) { return 2 * index + 1; }
 	static constexpr int RightChildIndex(const int index) { return 2 * index + 2; }
 	static constexpr int ParentIndex(const int index) { return (index - 1) / 2; }
@@ -109,32 +111,33 @@ private:
 		return descendants;
 	}
 
-	void HeapifyDown(const int index) {
-		return IsMinLevel(index) ? HeapifyDown(index, std::less<T>()) : HeapifyDown(index, std::greater<T>());
+	void HeapifyDown(const int i) {
+		return IsMinLevel(i) ? HeapifyDown(i, kLessComparator) : HeapifyDown(i, kGreaterComparator);
 	}
 
-	void HeapifyDown(const int index, const std::function<bool(T, T)>& comparator) {
+	template <typename Comparator>
+	void HeapifyDown(const int i, const Comparator& comparator) {
 
-		const auto descendants = GetDescendants(index);
+		const auto descendants = GetDescendants(i);
 		if (descendants.empty()) return;
 
 		const auto extremum = *std::min_element(
 			std::cbegin(descendants), std::cend(descendants), [&](const auto j, const auto k) {
-				return comparator(data_.at(j), data_.at(k));
+				return comparator(data_[j], data_[k]);
 			});
 
-		if (extremum > RightChildIndex(index)) {
-			if (comparator(data_.at(extremum), data_.at(index))) {
-				std::swap(data_.at(extremum), data_.at(index));
+		if (extremum > RightChildIndex(i)) {
+			if (comparator(data_[extremum], data_[i])) {
+				std::swap(data_[extremum], data_[i]);
 
-				if (!comparator(data_.at(extremum), data_.at(ParentIndex(extremum)))) {
-					std::swap(data_.at(extremum), data_.at(ParentIndex(extremum)));
+				if (!comparator(data_[extremum], data_[ParentIndex(extremum)])) {
+					std::swap(data_[extremum], data_[ParentIndex(extremum)]);
 				}
 
 				HeapifyDown(extremum, comparator);
 			}
-		} else if (comparator(data_.at(extremum), data_.at(index))) {
-			std::swap(data_.at(extremum), data_.at(index));
+		} else if (comparator(data_[extremum], data_[i])) {
+			std::swap(data_[extremum], data_[i]);
 		}
 	}
 
@@ -143,35 +146,38 @@ private:
 		if (!HasParent(index)) return;
 
 		if (IsMinLevel(index)) {
-			if (data_.at(index) > data_[ParentIndex(index)]) {
-				std::swap(data_.at(index), data_[ParentIndex(index)]);
-				HeapifyUp(ParentIndex(index), std::greater<T>());
+			if (data_[index] > data_[ParentIndex(index)]) {
+				std::swap(data_[index], data_[ParentIndex(index)]);
+				HeapifyUp(ParentIndex(index), kGreaterComparator);
 			} else {
-				HeapifyUp(index, std::less<T>());
+				HeapifyUp(index, kLessComparator);
 			}
 		} else {
-			if (data_.at(index) < data_[ParentIndex(index)]) {
-				std::swap(data_.at(index), data_[ParentIndex(index)]);
-				HeapifyUp(ParentIndex(index), std::less<T>());
+			if (data_[index] < data_[ParentIndex(index)]) {
+				std::swap(data_[index], data_[ParentIndex(index)]);
+				HeapifyUp(ParentIndex(index), kLessComparator);
 			} else {
-				HeapifyUp(index, std::greater<T>());
+				HeapifyUp(index, kGreaterComparator);
 			}
 		}
 	}
 
-	void HeapifyUp(const int index, const std::function<bool(T, T)>& comparator) {
+	template <typename Comparator>
+	void HeapifyUp(const int index, const Comparator& comparator) {
 
 		if (HasParent(index) && HasParent(ParentIndex(index))) {
 			const auto grandparent = ParentIndex(ParentIndex(index));
 
-			if (comparator(data_.at(index), data_[grandparent])) {
-				std::swap(data_.at(index), data_[grandparent]);
+			if (comparator(data_[index], data_[grandparent])) {
+				std::swap(data_[index], data_[grandparent]);
 				HeapifyUp(grandparent, comparator);
 			}
 		}
 	}
 
-	static constexpr int kRootLeftChildIndex = LeftChildIndex(0);
-	static constexpr int kRootRightChildIndex = RightChildIndex(0);
+	static constexpr auto kRootLeftChildIndex = LeftChildIndex(0);
+	static constexpr auto kRootRightChildIndex = RightChildIndex(0);
+	static constexpr auto kLessComparator = std::less<T>{};
+	static constexpr auto kGreaterComparator = std::greater<T>{};
 	std::vector<T> data_;
 };
