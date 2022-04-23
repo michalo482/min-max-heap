@@ -9,7 +9,8 @@ template <typename T>
 class MinMaxHeap {
 
 public:
-	MinMaxHeap(std::initializer_list<T> data = {})
+	MinMaxHeap() noexcept = default;
+	MinMaxHeap(std::initializer_list<T> data)
 		: MinMaxHeap{std::cbegin(data), std::cend(data)} {}
 
 	template <typename TIterator>
