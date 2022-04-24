@@ -108,24 +108,24 @@ private:
 		return descendants;
 	}
 
-	void HeapifyDown(const int i) {
-		return IsMinLevel(i) ? HeapifyDown(i, kLessComparator) : HeapifyDown(i, kGreaterComparator);
+	void HeapifyDown(const int index) {
+		return IsMinLevel(index) ? HeapifyDown(index, kLessComparator) : HeapifyDown(index, kGreaterComparator);
 	}
 
 	template <typename Comparator>
-	void HeapifyDown(const int i, const Comparator& comparator) {
+	void HeapifyDown(const int index, const Comparator& comparator) {
 
-		const auto descendants = GetDescendants(i);
+		const auto descendants = GetDescendants(index);
 		if (descendants.empty()) return;
 
 		const auto extremum = *std::min_element(
-			std::cbegin(descendants), std::cend(descendants), [this, &comparator](const auto j, const auto k) {
-				return comparator(data_[j], data_[k]);
+			std::cbegin(descendants), std::cend(descendants), [this, &comparator](const auto i, const auto j) {
+				return comparator(data_[i], data_[j]);
 			});
 
-		if (extremum > RightChildIndex(i)) {
-			if (comparator(data_[extremum], data_[i])) {
-				std::swap(data_[extremum], data_[i]);
+		if (extremum > RightChildIndex(index)) {
+			if (comparator(data_[extremum], data_[index])) {
+				std::swap(data_[extremum], data_[index]);
 
 				if (!comparator(data_[extremum], data_[ParentIndex(extremum)])) {
 					std::swap(data_[extremum], data_[ParentIndex(extremum)]);
@@ -133,8 +133,8 @@ private:
 
 				HeapifyDown(extremum, comparator);
 			}
-		} else if (comparator(data_[extremum], data_[i])) {
-			std::swap(data_[extremum], data_[i]);
+		} else if (comparator(data_[extremum], data_[index])) {
+			std::swap(data_[extremum], data_[index]);
 		}
 	}
 
