@@ -119,7 +119,7 @@ private:
 		if (descendants.empty()) return;
 
 		const auto extremum = *std::min_element(
-			std::cbegin(descendants), std::cend(descendants), [&](const auto j, const auto k) {
+			std::cbegin(descendants), std::cend(descendants), [this, &comparator](const auto j, const auto k) {
 				return comparator(data_[j], data_[k]);
 			});
 
