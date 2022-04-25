@@ -18,7 +18,7 @@ TEST_CASE("Initialization", "[MinMaxHeap]") {
 
 	SECTION("Initializing a min-max heap with one element") {
 		const auto value = 0;
-		const MinMaxHeap<int> heap{value};
+		const MinMaxHeap heap{value};
 
 		SECTION("The size of the heap is one") {
 			REQUIRE(heap.Size() == 1);
@@ -34,7 +34,7 @@ TEST_CASE("Initialization", "[MinMaxHeap]") {
 	}
 
 	SECTION("Initializing a min-max heap with a monotonically increasing collection of elements") {
-		const MinMaxHeap<int> heap{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+		const MinMaxHeap heap{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
 		SECTION("The size of the heap equals to the number of elements in the collection the heap was constructed with") {
 			REQUIRE(heap.Size() == 10);
@@ -50,7 +50,7 @@ TEST_CASE("Initialization", "[MinMaxHeap]") {
 	}
 
 	SECTION("Initializing a min-max heap with a monotonically decreasing collection of elements") {
-		const MinMaxHeap<int> heap{9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
+		const MinMaxHeap heap{9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
 
 		SECTION("The size of the heap equals to the number of elements in the collection the heap was constructed with") {
 			REQUIRE(heap.Size() == 10);
@@ -66,7 +66,7 @@ TEST_CASE("Initialization", "[MinMaxHeap]") {
 	}
 
 	SECTION("Initializing a min-max heap with a random collection of elements") {
-		const MinMaxHeap<int> heap{6, 8, 4, 10, 12, 5, 1, 14, 9, 2, 13, 3, 0, 7, 11};
+		const MinMaxHeap heap{6, 8, 4, 10, 12, 5, 1, 14, 9, 2, 13, 3, 0, 7, 11};
 
 		SECTION("The size of the heap equals to the number of elements in the collection the heap was constructed with") {
 			REQUIRE(heap.Size() == 15);
@@ -82,7 +82,7 @@ TEST_CASE("Initialization", "[MinMaxHeap]") {
 	}
 
 	SECTION("Initializing a min-max heap with a collection of duplicate elements") {
-		const MinMaxHeap<int> heap{7, 7, 7, 7, 7, 7, 7, 7, 7, 7};
+		const MinMaxHeap heap{7, 7, 7, 7, 7, 7, 7, 7, 7, 7};
 
 		SECTION("The size of the heap equals to the number of elements in the collection the heap was constructed with") {
 			REQUIRE(heap.Size() == 10);
@@ -99,7 +99,7 @@ TEST_CASE("Initialization", "[MinMaxHeap]") {
 }
 
 TEST_CASE("Add", "[MinMaxHeap]") {
-	MinMaxHeap<int> heap{9, 6, 1, 4, 8, 3, 2, 7, 5};
+	MinMaxHeap heap{9, 6, 1, 4, 8, 3, 2, 7, 5};
 
 	SECTION("Adding a element to the heap which is smaller than its current minimum") {
 		auto value = 0;
@@ -136,7 +136,7 @@ TEST_CASE("Add", "[MinMaxHeap]") {
 }
 
 TEST_CASE("Remove", "[MinMaxHeap]") {
-	MinMaxHeap<int> heap{9, 6, 1, 4, 8, 3, 2, 7, 5, 0};
+	MinMaxHeap heap{9, 6, 1, 4, 8, 3, 2, 7, 5, 0};
 
 	SECTION("Removing the minimum element") {
 		const auto min_value = heap.RemoveMin();
